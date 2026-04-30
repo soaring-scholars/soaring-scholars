@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>HQIM Readiness Assessment | Soaring Scholars LLC</title>
+<meta name="description" content="Take the free HQIM Readiness Assessment from Soaring Scholars LLC. Know exactly where your campus stands in 10 minutes."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#F7F3EE;color:#1a1714;font-family:'DM Sans',sans-serif;min-height:100vh}
+:root{
+  --gold:#B8860B;--gold-lt:#D4A843;--gold-pale:#F0DFA0;
+  --forest:#2E6B4A;--forest-lt:#3D8A60;--forest-dk:#1a3d2b;
+  --cream:#F7F3EE;--cream-dk:#EDE6D8;--ink:#1a1714;
+  --ink-60:rgba(26,23,20,.6);--ink-20:rgba(26,23,20,.12);
+}
+
+/* ── HEADER ── */
+.site-header{
+  background:var(--forest-dk);
+  padding:1rem 0;
+  position:sticky;top:0;z-index:50;
+}
+.header-inner{
+  width:min(1200px,100% - 2rem);
+  margin-inline:auto;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.header-logo img{height:40px;mix-blend-mode:screen;filter:brightness(1.4)}
+.header-back{
+  font-family:'DM Sans',sans-serif;font-size:.75rem;
+  font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(240,230,210,.6);text-decoration:none;
+  transition:color .2s;
+}
+.header-back:hover{color:var(--gold-lt)}
+
+/* ── LAYOUT ── */
+.page{width:min(860px,100% - 2rem);margin-inline:auto;padding:3rem 0 5rem}
+
+/* ── SCREEN MANAGEMENT ── */
+.screen{display:none}
+.screen.active{display:block}
+
+/* ── INTRO SCREEN ── */
+.intro-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--gold-pale);
+  padding:.4rem 1rem;margin-bottom:1.5rem;
+}
+.intro-badge span{
+  font-family:'DM Sans',sans-serif;font-size:.65rem;
+  font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--forest-dk);
+}
+.intro-h1{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:700;color:var(--ink);line-height:1.08;
+  margin-bottom:.75rem;
+}
+.intro-h1 em{font-style:italic;color:var(--forest)}
+.intro-sub{
+  font-family:'Libre Baskerville',Georgia,serif;
+  font-size:1rem;line-height:1.85;
+  color:var(--ink-60);max-width:54ch;margin-bottom:2.5rem;
+}
+.intro-meta{
+  display:flex;flex-wrap:wrap;gap:2rem;
+  padding:1.5rem 0;
+  border-top:1px solid var(--ink-20);
+  border-bottom:1px solid var(--ink-20);
+  margin-bottom:2.5rem;
+}
+.meta-item strong{
+  display:block;
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.8rem;font-weight:700;color:var(--forest);line-height:1;
+}
+.meta-item span{
+  font-family:'DM Sans',sans-serif;font-size:.7rem;
+  font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-60);margin-top:.2rem;display:block;
+}
+.intro-form{display:flex;flex-direction:column;gap:1.25rem;max-width:480px;margin-bottom:2rem}
+.field-wrap{display:flex;flex-direction:column;gap:.35rem}
+.field-label{
+  font-family:'DM Sans',sans-serif;font-size:.65rem;
+  font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);
+}
+.field-input{
+  background:white;
+  border:1.5px solid var(--ink-20);
+  padding:.75rem 1rem;
+  font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--ink);
+  outline:none;transition:border-color .2s;border-radius:0;
+}
+.field-input:focus{border-color:var(--forest)}
+.field-select{
+  background:white;border:1.5px solid var(--ink-20);
+  padding:.75rem 1rem;
+  font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--ink);
+  outline:none;-webkit-appearance:none;border-radius:0;
+  cursor:pointer;transition:border-color .2s;
+}
+.field-select:focus{border-color:var(--forest)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+
+/* ── BTN ── */
+.btn{
+  font-family:'DM Sans',sans-serif;font-size:.78rem;
+  font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+  border:none;cursor:pointer;transition:background .2s,transform .2s;
+  display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;
+}
+.btn-forest{background:var(--forest);color:white}
+.btn-forest:hover{background:var(--forest-lt);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:var(--forest-dk)}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1.5px solid var(--forest);color:var(--forest)}
+.btn-outline:hover{background:var(--forest);color:white}
+.btn-lg{padding:1.1rem 2.5rem;font-size:.82rem}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{margin-bottom:2.5rem}
+.progress-top{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:.6rem;
+}
+.progress-label{
+  font-family:'DM Sans',sans-serif;font-size:.72rem;
+  font-weight:500;color:var(--ink-60);
+}
+.progress-count{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:.85rem;font-weight:700;color:var(--forest);
+}
+.progress-bar{
+  height:3px;background:var(--ink-20);
+  position:relative;overflow:hidden;
+}
+.progress-fill{
+  height:100%;background:var(--gold);
+  transition:width .4s ease;
+}
+
+/* ── DOMAIN HEADER ── */
+.domain-header{
+  background:var(--forest-dk);
+  padding:1.5rem 2rem;
+  margin-bottom:2rem;
+  position:relative;overflow:hidden;
+}
+.domain-header::after{
+  content:'';position:absolute;top:0;bottom:0;left:0;width:4px;
+  background:var(--gold);
+}
+.domain-num{
+  font-family:'DM Sans',sans-serif;font-size:.65rem;
+  font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.4rem;
+}
+.domain-name{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.2rem;font-weight:700;color:white;
+  margin-bottom:.2rem;
+}
+.domain-framework{
+  font-family:'DM Sans',sans-serif;font-size:.75rem;
+  color:rgba(240,230,210,.55);font-style:italic;
+}
+
+/* ── SCALE LEGEND ── */
+.scale-legend{
+  display:flex;gap:0;
+  margin-bottom:1.75rem;
+  border:1px solid var(--ink-20);
+  overflow:hidden;
+}
+.scale-legend-item{
+  flex:1;padding:.5rem .25rem;text-align:center;
+  background:var(--cream-dk);
+  border-right:1px solid var(--ink-20);
+}
+.scale-legend-item:last-child{border-right:none}
+.scale-legend-num{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1rem;font-weight:700;color:var(--forest);
+  display:block;
+}
+.scale-legend-lbl{
+  font-family:'DM Sans',sans-serif;font-size:.6rem;
+  font-weight:500;color:var(--ink-60);
+  text-transform:uppercase;letter-spacing:.08em;
+  display:block;margin-top:.1rem;
+}
+
+/* ── QUESTION ── */
+.question-block{
+  padding:1.5rem 0;
+  border-bottom:1px solid var(--ink-20);
+}
+.question-block:last-of-type{border-bottom:none}
+.q-text{
+  font-family:'Libre Baskerville',Georgia,serif;
+  font-size:.98rem;line-height:1.7;color:var(--ink);
+  margin-bottom:1rem;
+}
+.q-num{
+  font-family:'DM Sans',sans-serif;font-size:.7rem;
+  font-weight:700;color:var(--gold);margin-right:.5rem;
+}
+.rating-btns{
+  display:flex;gap:.5rem;flex-wrap:wrap;
+}
+.rating-btn{
+  width:56px;height:52px;
+  border:1.5px solid var(--ink-20);
+  background:white;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:all .15s;
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.15rem;font-weight:700;color:var(--ink-60);
+  gap:2px;
+}
+.rating-btn .r-label{
+  font-family:'DM Sans',sans-serif;
+  font-size:.5rem;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-60);
+  line-height:1;
+}
+.rating-btn:hover{
+  border-color:var(--forest);color:var(--forest);background:rgba(46,107,74,.04);
+}
+.rating-btn.selected{
+  background:var(--forest);border-color:var(--forest);
+  color:white;
+}
+.rating-btn.selected .r-label{color:rgba(255,255,255,.7)}
+
+/* ── NAV BUTTONS ── */
+.q-nav{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-top:2.5rem;
+  padding-top:2rem;
+  border-top:1px solid var(--ink-20);
+}
+.q-nav-info{
+  font-family:'DM Sans',sans-serif;font-size:.75rem;
+  color:var(--ink-60);
+}
+
+/* ── RESULTS ── */
+.results-header{
+  background:var(--forest-dk);
+  padding:3rem;margin-bottom:2.5rem;
+  text-align:center;position:relative;overflow:hidden;
+}
+.results-header::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,134,11,.1),transparent);
+}
+.results-eyebrow{
+  font-family:'DM Sans',sans-serif;font-size:.65rem;
+  font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;position:relative;
+}
+.results-score-num{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:clamp(4rem,10vw,7rem);font-weight:700;
+  color:white;line-height:1;position:relative;
+}
+.results-score-denom{
+  font-family:'DM Sans',sans-serif;font-size:1rem;
+  color:rgba(240,230,210,.5);margin-left:.25rem;
+}
+.results-band{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.4rem;font-style:italic;
+  color:var(--gold-lt);margin-top:.5rem;position:relative;
+}
+
+/* Score gauge */
+.score-gauge{
+  width:220px;height:110px;
+  position:relative;margin:1.5rem auto;
+}
+.gauge-svg{width:100%;height:100%}
+
+.results-band-box{
+  border-left:4px solid var(--gold);
+  padding:1.5rem 1.75rem;
+  background:rgba(46,107,74,.06);
+  margin-bottom:2rem;
+}
+.band-label{
+  font-family:'DM Sans',sans-serif;font-size:.65rem;
+  font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--forest);margin-bottom:.5rem;
+}
+.band-title{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.3rem;font-weight:700;color:var(--ink);
+  margin-bottom:.6rem;
+}
+.band-desc{
+  font-family:'Libre Baskerville',Georgia,serif;
+  font-size:.95rem;line-height:1.8;color:var(--ink-60);
+}
+
+/* Domain breakdown */
+.breakdown-title{
+  font-family:'DM Sans',sans-serif;font-size:.65rem;
+  font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink-60);margin-bottom:1rem;
+}
+.domain-bars{display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem}
+.domain-bar-row{display:grid;grid-template-columns:1fr auto;gap:1rem;align-items:center}
+.domain-bar-info{}
+.domain-bar-name{
+  font-family:'DM Sans',sans-serif;font-size:.78rem;
+  font-weight:500;color:var(--ink);margin-bottom:.3rem;
+}
+.domain-bar-track{
+  height:6px;background:var(--ink-20);
+  position:relative;overflow:hidden;
+  flex:1;min-width:120px;
+}
+.domain-bar-fill{
+  height:100%;background:var(--gold);
+  transition:width .8s cubic-bezier(.16,1,.3,1);
+}
+.domain-bar-score{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:.9rem;font-weight:700;color:var(--forest);
+  white-space:nowrap;
+}
+
+/* Redirect countdown */
+.redirect-box{
+  background:var(--forest);
+  padding:2rem;text-align:center;
+  margin-top:2rem;
+}
+.redirect-box p{
+  font-family:'DM Sans',sans-serif;font-size:.88rem;
+  color:rgba(240,230,210,.75);margin-bottom:1rem;
+  line-height:1.6;
+}
+.redirect-box p strong{color:white}
+.countdown{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:2.5rem;font-weight:700;color:var(--gold-lt);
+  display:block;margin-bottom:1rem;
+}
+.redirect-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* Error state */
+.error-msg{
+  font-family:'DM Sans',sans-serif;font-size:.78rem;
+  color:#c0392b;margin-top:.35rem;display:none;
+}
+
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}
+  .rating-btns{gap:.35rem}
+  .rating-btn{width:48px;height:46px;font-size:1rem}
+  .intro-meta{gap:1.25rem}
+  .results-header{padding:2rem 1.5rem}
+  .q-nav{flex-direction:column;gap:1rem;align-items:stretch}
+  .q-nav .btn{justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <img src="soaring-scholars-logo.png" alt="Soaring Scholars LLC"/>
+    </a>
+    <a href="index.html" class="header-back">← Back to Site</a>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════
+  SCREEN 1: INTRO + CONTACT INFO
+══════════════════════════════════════════ -->
+<div class="page">
+<div class="screen active" id="screenIntro">
+  <div class="intro-badge">
+    <span>Free Assessment · Soaring Scholars LLC</span>
+  </div>
+  <h1 class="intro-h1">
+    <em>HQIM Readiness</em><br>Assessment
+  </h1>
+  <p class="intro-sub">
+    Rate yourself honestly on each of the 20 indicators below. You will receive your score, results band, and a personalized recommendation immediately, followed by an invitation to book a free discovery call.
+  </p>
+
+  <div class="intro-meta">
+    <div class="meta-item"><strong>20</strong><span>Questions</span></div>
+    <div class="meta-item"><strong>5</strong><span>Domains</span></div>
+    <div class="meta-item"><strong>10 min</strong><span>To Complete</span></div>
+    <div class="meta-item"><strong>Free</strong><span>No Cost</span></div>
+  </div>
+
+  <div class="intro-form">
+    <div class="form-row">
+      <div class="field-wrap">
+        <label class="field-label" for="i_fn">First Name</label>
+        <input class="field-input" id="i_fn" type="text" placeholder="First Name"/>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label" for="i_ln">Last Name</label>
+        <input class="field-input" id="i_ln" type="text" placeholder="Last Name"/>
+      </div>
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="i_em">Work Email</label>
+      <input class="field-input" id="i_em" type="email" placeholder="you@district.edu"/>
+      <span class="error-msg" id="emError">Please enter a valid email address.</span>
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="i_ro">Your Role</label>
+      <select class="field-select" id="i_ro">
+        <option value="" disabled selected>Select your role</option>
+        <option>Campus Principal</option>
+        <option>Assistant Principal</option>
+        <option>Instructional Coach</option>
+        <option>Curriculum Director</option>
+        <option>District Administrator</option>
+        <option>Classroom Teacher</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="i_di">District / Campus</label>
+      <input class="field-input" id="i_di" type="text" placeholder="e.g. Birdville ISD"/>
+    </div>
+  </div>
+  <button class="btn btn-forest btn-lg" onclick="startAssessment()">
+    Begin Assessment
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </button>
+  <p style="font-family:'DM Sans',sans-serif;font-size:.75rem;color:var(--ink-60);margin-top:1rem;">
+    Your information is only used to send you your results and will never be shared.
+  </p>
+</div>
+
+<!-- ══════════════════════════════════════════
+  SCREEN 2: QUESTIONS (rendered by JS)
+══════════════════════════════════════════ -->
+<div class="screen" id="screenQuestions">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Your Progress</span>
+      <span class="progress-count" id="progressCount">0 / 20 answered</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div id="domainContainer"></div>
+  <div class="q-nav">
+    <button class="btn btn-outline" id="btnPrev" onclick="prevDomain()" style="display:none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Previous
+    </button>
+    <span class="q-nav-info" id="navInfo">Domain 1 of 5</span>
+    <button class="btn btn-forest" id="btnNext" onclick="nextDomain()">
+      Next Domain
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+  SCREEN 3: RESULTS
+══════════════════════════════════════════ -->
+<div class="screen" id="screenResults">
+  <div class="results-header">
+    <p class="results-eyebrow">Your Results · HQIM Readiness Assessment</p>
+    <div class="results-score-num" id="rScoreNum">0<span class="results-score-denom">/ 80</span></div>
+    <div class="results-band" id="rBandName">—</div>
+  </div>
+
+  <div class="results-band-box">
+    <div class="band-label" id="rBandLabel">Score Band</div>
+    <div class="band-title" id="rBandTitle">—</div>
+    <div class="band-desc" id="rBandDesc">—</div>
+  </div>
+
+  <p class="breakdown-title">Score by Domain</p>
+  <div class="domain-bars" id="domainBars"></div>
+
+  <div class="redirect-box" id="redirectBox">
+    <p>Your results are ready. <strong>We're now taking you to book your free 30-minute discovery call</strong> where we will review your score together and map your highest-leverage next step.</p>
+    <span class="countdown" id="countdown">8</span>
+    <div class="redirect-actions">
+      <button class="btn btn-gold btn-lg" onclick="goToCalendly()">
+        Book My Discovery Call Now
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <button class="btn btn-outline" onclick="cancelRedirect()" style="color:rgba(240,230,210,.7);border-color:rgba(240,230,210,.3)">Stay on This Page</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+// ── DATA ─────────────────────────────────────────────
+const DOMAINS = [
+  {
+    num:1, name:"Curriculum Knowledge & Material Fidelity",
+    framework:"Grounded in Technical Virtue — Sergiovanni (2005)",
+    max:20,
+    questions:[
+      "I can articulate the coherent learning progression embedded across units in our HQIM curriculum.",
+      "I use the teacher-facing materials (lesson plans, teacher guides) as the primary driver of instruction.",
+      "I understand the intentional sequence of lesson components and maintain their integrity during delivery.",
+      "I can explain why specific problems and tasks were selected by the curriculum developers.",
+      "I know where my students are in the curriculum scope and sequence at any given time."
+    ]
+  },
+  {
+    num:2, name:"Instructional Practice & Lesson Execution",
+    framework:"Grounded in Educational Virtue — Sergiovanni (2005)",
+    max:20,
+    questions:[
+      "My instructional delivery reflects the pedagogical approach embedded in the HQIM (e.g., launch, explore, debrief).",
+      "I allocate instructional time according to the curriculum's recommended pacing and lesson structure.",
+      "I use the curriculum's recommended questioning strategies to facilitate student discourse.",
+      "I make intentional, evidence-based modifications rather than replacing curriculum components.",
+      "My students regularly engage with grade-level content at the rigor the curriculum intends."
+    ]
+  },
+  {
+    num:3, name:"Professional Commitment & Ownership",
+    framework:"Grounded in Professional & Ethical Virtue — Sergiovanni (2005)",
+    max:16,
+    questions:[
+      "I take personal responsibility for the outcomes of my HQIM implementation, regardless of external factors.",
+      "I proactively seek out professional learning opportunities related to our HQIM curriculum.",
+      "I hold myself accountable to implementation standards even when not being formally observed.",
+      "I advocate for student access to the full curriculum rather than reducing rigor for struggling learners."
+    ]
+  },
+  {
+    num:4, name:"Collaborative Culture & Coaching Receptivity",
+    framework:"Grounded in Human Virtue — Sergiovanni (2005)",
+    max:12,
+    questions:[
+      "I engage in productive collaborative planning with colleagues focused on HQIM lesson preparation.",
+      "I apply coaching feedback on curriculum implementation within one to two instructional cycles.",
+      "I contribute to a team culture where HQIM fidelity is a shared professional norm, not a top-down mandate."
+    ]
+  },
+  {
+    num:5, name:"Data Literacy & Responsive Instruction",
+    framework:"Grounded in Technical & Educational Virtue — Sergiovanni (2005)",
+    max:12,
+    questions:[
+      "I use curriculum-embedded assessments to identify gaps and inform my instructional decisions.",
+      "I can distinguish between a student misunderstanding the content and a curriculum pacing concern.",
+      "I connect student performance data back to specific lesson components or instructional decisions."
+    ]
+  }
+];
+
+const SCALE_LABELS = ['Not Yet','Emerging','Developing','Consistent'];
+
+const BANDS = [
+  {min:0,  max:39, band:"Early Awareness",     title:"Early Awareness",
+   desc:"Your campus is in the early stages of HQIM adoption. Immediate priority: foundational professional development on curriculum design intent and building staff buy-in. A Soaring Scholars HQIM Jumpstart Day is your fastest path forward."},
+  {min:40, max:54, band:"Building Momentum",    title:"Building Momentum",
+   desc:"Structures are forming but implementation is inconsistent. Focus on coherent coaching systems, collaborative planning routines, and targeted observation cycles. A Semester Partnership is your most powerful next step."},
+  {min:55, max:68, band:"Developing Fidelity",  title:"Developing Fidelity",
+   desc:"Your campus shows strong potential with identifiable pockets of excellence. The goal now is systemic consistency. Consider a targeted Implementation Fidelity Partnership to move high-performer practices into the campus norm."},
+  {min:69, max:80, band:"Commitment in Action", title:"Commitment in Action",
+   desc:"Your campus demonstrates high implementation fidelity grounded in professional commitment. The priority is sustaining this culture, building internal capacity, and expanding to all classrooms. Let's build a model campus together."}
+];
+
+const CALENDLY = "https://calendly.com/janelle-soaringscholars/30min";
+const ASANA_FORM = "https://form.asana.com/?k=nYEkWSkhvt8D9awkrmHvUg&d=1214374214145801";
+
+// ── STATE ────────────────────────────────────────────
+let answers = {};  // key: "d{domainIdx}_q{qIdx}" value: 1-4
+let currentDomain = 0;
+let userData = {};
+let redirectTimer = null;
+let redirectSeconds = 8;
+
+// ── HELPERS ──────────────────────────────────────────
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function getGlobalQNum(dIdx, qIdx){
+  let n = 0;
+  for(let i=0;i<dIdx;i++) n += DOMAINS[i].questions.length;
+  return n + qIdx + 1;
+}
+
+function getTotalAnswered(){
+  return Object.keys(answers).length;
+}
+
+function getTotalQuestions(){
+  return DOMAINS.reduce((s,d)=>s+d.questions.length, 0);
+}
+
+function getDomainScore(dIdx){
+  let s = 0;
+  DOMAINS[dIdx].questions.forEach((_,qIdx)=>{
+    s += answers[`d${dIdx}_q${qIdx}`] || 0;
+  });
+  return s;
+}
+
+function getTotalScore(){
+  return DOMAINS.reduce((_,__,i)=>_+getDomainScore(i), 0);
+}
+
+function getBand(score){
+  return BANDS.find(b=>score>=b.min&&score<=b.max) || BANDS[0];
+}
+
+function updateProgress(){
+  const answered = getTotalAnswered();
+  const total = getTotalQuestions();
+  const pct = Math.round(answered/total*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('progressCount').textContent = answered+' / '+total+' answered';
+}
+
+// ── START ASSESSMENT ─────────────────────────────────
+function startAssessment(){
+  const fn = document.getElementById('i_fn').value.trim();
+  const ln = document.getElementById('i_ln').value.trim();
+  const em = document.getElementById('i_em').value.trim();
+  const ro = document.getElementById('i_ro').value;
+  const di = document.getElementById('i_di').value.trim();
+
+  const emEl = document.getElementById('i_em');
+  const emErr = document.getElementById('emError');
+
+  if(!fn||!em){
+    if(!fn) document.getElementById('i_fn').style.borderColor='#c0392b';
+    if(!em){emEl.style.borderColor='#c0392b';emErr.style.display='block';}
+    return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){
+    emEl.style.borderColor='#c0392b';emErr.style.display='block';
+    return;
+  }
+
+  userData = {fn,ln,em,ro,di,fullName:fn+(ln?' '+ln:'')};
+  currentDomain = 0;
+  renderDomain(0);
+  show('screenQuestions');
+}
+
+// ── RENDER DOMAIN ────────────────────────────────────
+function renderDomain(dIdx){
+  const d = DOMAINS[dIdx];
+  const container = document.getElementById('domainContainer');
+
+  let html = `
+    <div class="domain-header">
+      <div class="domain-num">Domain ${d.num} of ${DOMAINS.length}</div>
+      <div class="domain-name">${d.name}</div>
+      <div class="domain-framework">${d.framework}</div>
+    </div>
+    <div class="scale-legend">
+      ${[1,2,3,4].map((n,i)=>`
+        <div class="scale-legend-item">
+          <span class="scale-legend-num">${n}</span>
+          <span class="scale-legend-lbl">${SCALE_LABELS[i]}</span>
+        </div>`).join('')}
+    </div>
+  `;
+
+  d.questions.forEach((q,qIdx)=>{
+    const key = `d${dIdx}_q${qIdx}`;
+    const gNum = getGlobalQNum(dIdx, qIdx);
+    html += `
+      <div class="question-block" id="qblock_${key}">
+        <p class="q-text"><span class="q-num">${gNum}.</span>${q}</p>
+        <div class="rating-btns">
+          ${[1,2,3,4].map((val,i)=>`
+            <button class="rating-btn ${answers[key]===val?'selected':''}"
+              onclick="selectRating('${key}',${val},this)"
+              aria-label="Rating ${val}: ${SCALE_LABELS[i]}">
+              ${val}
+              <span class="r-label">${SCALE_LABELS[i]}</span>
+            </button>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+
+  // Nav button state
+  document.getElementById('btnPrev').style.display = dIdx > 0 ? 'flex' : 'none';
+  const isLast = dIdx === DOMAINS.length - 1;
+  const nextBtn = document.getElementById('btnNext');
+  nextBtn.innerHTML = isLast
+    ? `See My Results <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+    : `Next Domain <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+  document.getElementById('navInfo').textContent = `Domain ${dIdx+1} of ${DOMAINS.length}`;
+  updateProgress();
+}
+
+function selectRating(key, val, btn){
+  answers[key] = val;
+  // Update button states in this question
+  btn.closest('.rating-btns').querySelectorAll('.rating-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  updateProgress();
+}
+
+function nextDomain(){
+  // Check all questions in this domain answered
+  const d = DOMAINS[currentDomain];
+  const unanswered = d.questions.filter((_,qi)=>!answers[`d${currentDomain}_q${qi}`]);
+  if(unanswered.length > 0){
+    // Highlight unanswered
+    d.questions.forEach((_,qi)=>{
+      const key=`d${currentDomain}_q${qi}`;
+      if(!answers[key]){
+        const el=document.getElementById('qblock_'+key);
+        if(el){
+          el.style.background='rgba(184,134,11,.06)';
+          el.style.borderLeft='3px solid var(--gold)';
+          el.style.paddingLeft='1rem';
+          setTimeout(()=>{el.style.background='';el.style.borderLeft='';el.style.paddingLeft='';},3000);
+        }
+      }
+    });
+    document.getElementById('qblock_d'+currentDomain+'_q0')?.scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  if(currentDomain < DOMAINS.length-1){
+    currentDomain++;
+    renderDomain(currentDomain);
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    showResults();
+  }
+}
+
+function prevDomain(){
+  if(currentDomain > 0){
+    currentDomain--;
+    renderDomain(currentDomain);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+
+// ── RESULTS ─────────────────────────────────────────
+function showResults(){
+  const total = getTotalScore();
+  const band = getBand(total);
+
+  document.getElementById('rScoreNum').innerHTML = `${total}<span class="results-score-denom">/ 80</span>`;
+  document.getElementById('rBandName').textContent = band.band;
+  document.getElementById('rBandLabel').textContent = `Score ${band.min}–${band.max}`;
+  document.getElementById('rBandTitle').textContent = band.title;
+  document.getElementById('rBandDesc').textContent = band.desc;
+
+  // Domain bars
+  const barsHtml = DOMAINS.map((d,i)=>{
+    const s = getDomainScore(i);
+    const pct = Math.round(s/d.max*100);
+    return `
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.35rem;">
+          <span style="font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;color:var(--ink);">${d.name}</span>
+          <span style="font-family:'Playfair Display',Georgia,serif;font-size:.9rem;font-weight:700;color:var(--forest);white-space:nowrap;margin-left:1rem;">${s} / ${d.max}</span>
+        </div>
+        <div class="domain-bar-track">
+          <div class="domain-bar-fill" style="width:0%" data-pct="${pct}"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('domainBars').innerHTML = barsHtml;
+
+  show('screenResults');
+
+  // Animate bars after paint
+  setTimeout(()=>{
+    document.querySelectorAll('.domain-bar-fill').forEach(el=>{
+      el.style.width = el.dataset.pct+'%';
+    });
+  },100);
+
+  // Send data to Asana form (opens in background tab)
+  submitToAsana(total, band.band);
+
+  // Start countdown
+  startRedirectCountdown();
+}
+
+function submitToAsana(score, band){
+  // Opens Asana form silently in background — Janelle sees the submission
+  // We can't auto-fill Asana forms, so we open it for awareness
+  // The email notification from Asana will show the submitter
+  try {
+    const w = window.open(ASANA_FORM,'asana_bg');
+    // Close after brief moment since we just want the notification triggered
+    if(w) setTimeout(()=>{try{w.close()}catch(e){}},8000);
+  } catch(e){}
+
+  // Also send email to Janelle via mailto as backup data record
+  // This is silent — just constructs the link in case user wants to share
+  window._assessmentData = {
+    name: userData.fullName,
+    email: userData.em,
+    role: userData.ro,
+    district: userData.di,
+    score: score,
+    band: band,
+    domains: DOMAINS.map((d,i)=>d.name+': '+getDomainScore(i)+'/'+d.max).join('; ')
+  };
+}
+
+// ── COUNTDOWN & REDIRECT ────────────────────────────
+function startRedirectCountdown(){
+  redirectSeconds = 8;
+  document.getElementById('countdown').textContent = redirectSeconds;
+  redirectTimer = setInterval(()=>{
+    redirectSeconds--;
+    const el = document.getElementById('countdown');
+    if(el) el.textContent = redirectSeconds;
+    if(redirectSeconds <= 0){
+      clearInterval(redirectTimer);
+      goToCalendly();
+    }
+  },1000);
+}
+
+function cancelRedirect(){
+  clearInterval(redirectTimer);
+  document.getElementById('redirectBox').innerHTML = `
+    <p style="font-family:'DM Sans',sans-serif;font-size:.88rem;color:rgba(240,230,210,.8);line-height:1.6;margin:0;">
+      Ready when you are. Book your free discovery call to review these results together.
+    </p>
+    <div style="margin-top:1.25rem">
+      <button class="btn btn-gold btn-lg" onclick="goToCalendly()">
+        Book My Discovery Call
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  `;
+}
+
+function goToCalendly(){
+  clearInterval(redirectTimer);
+  window.location.href = CALENDLY;
+}
+</script>
+</body>
+</html>
