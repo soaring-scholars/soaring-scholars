@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Principal Leadership Assessment | Soaring Scholars LLC</title>
+<meta name="description" content="Free leadership assessment for principals. Know exactly how well your campus is positioned for research-based curriculum implementation."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:#F7F3EE;color:#1a1714;font-family:'DM Sans',sans-serif;min-height:100vh}
+:root{
+  --gold:#B8860B;--gold-lt:#D4A843;--gold-pale:#F0DFA0;
+  --forest:#2E6B4A;--forest-lt:#3D8A60;--forest-dk:#1a3d2b;
+  --cream:#F7F3EE;--cream-dk:#EDE6D8;--ink:#1a1714;
+  --ink-60:rgba(26,23,20,.6);--ink-20:rgba(26,23,20,.12);
+}
+.site-header{background:var(--forest-dk);padding:1rem 0;position:sticky;top:0;z-index:50;}
+.header-inner{width:min(1200px,100% - 2rem);margin-inline:auto;display:flex;align-items:center;justify-content:space-between;}
+.header-logo img{height:40px;mix-blend-mode:screen;filter:brightness(1.4)}
+.header-back{font-family:'DM Sans',sans-serif;font-size:.75rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(240,230,210,.6);text-decoration:none;transition:color .2s;}
+.header-back:hover{color:var(--gold-lt)}
+.page{width:min(860px,100% - 2rem);margin-inline:auto;padding:3rem 0 5rem}
+.screen{display:none}.screen.active{display:block}
+
+/* INTRO */
+.intro-badge{display:inline-flex;align-items:center;gap:.5rem;background:var(--forest);padding:.4rem 1rem;margin-bottom:1.5rem;}
+.intro-badge span{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-lt);}
+.intro-h1{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;color:var(--ink);line-height:1.08;margin-bottom:.75rem;}
+.intro-h1 em{font-style:italic;color:var(--forest)}
+.intro-sub{font-family:'Libre Baskerville',Georgia,serif;font-size:1rem;line-height:1.85;color:var(--ink-60);max-width:54ch;margin-bottom:2.5rem;}
+.intro-meta{display:flex;flex-wrap:wrap;gap:2rem;padding:1.5rem 0;border-top:1px solid var(--ink-20);border-bottom:1px solid var(--ink-20);margin-bottom:2.5rem;}
+.meta-item strong{display:block;font-family:'Playfair Display',Georgia,serif;font-size:1.8rem;font-weight:700;color:var(--forest);line-height:1;}
+.meta-item span{font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-60);margin-top:.2rem;display:block;}
+.intro-form{display:flex;flex-direction:column;gap:1.25rem;max-width:480px;margin-bottom:2rem}
+.field-wrap{display:flex;flex-direction:column;gap:.35rem}
+.field-label{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);}
+.field-input{background:white;border:1.5px solid var(--ink-20);padding:.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--ink);outline:none;transition:border-color .2s;border-radius:0;}
+.field-input:focus{border-color:var(--forest)}
+.field-select{background:white;border:1.5px solid var(--ink-20);padding:.75rem 1rem;font-family:'DM Sans',sans-serif;font-size:1rem;color:var(--ink);outline:none;-webkit-appearance:none;border-radius:0;cursor:pointer;transition:border-color .2s;}
+.field-select:focus{border-color:var(--forest)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.btn{font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border:none;cursor:pointer;transition:background .2s,transform .2s;display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 2rem;}
+.btn-forest{background:var(--forest);color:white}.btn-forest:hover{background:var(--forest-lt);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:var(--forest-dk)}.btn-gold:hover{background:var(--gold-lt);transform:translateY(-1px)}
+.btn-outline{background:transparent;border:1.5px solid var(--forest);color:var(--forest)}.btn-outline:hover{background:var(--forest);color:white}
+.btn-lg{padding:1.1rem 2.5rem;font-size:.82rem}
+
+/* PROGRESS */
+.progress-wrap{margin-bottom:2.5rem}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;}
+.progress-label{font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:500;color:var(--ink-60);}
+.progress-count{font-family:'Playfair Display',Georgia,serif;font-size:.85rem;font-weight:700;color:var(--forest);}
+.progress-bar{height:3px;background:var(--ink-20);position:relative;overflow:hidden;}
+.progress-fill{height:100%;background:var(--gold);transition:width .4s ease;}
+
+/* DOMAIN HEADER */
+.domain-header{background:var(--forest-dk);padding:1.5rem 2rem;margin-bottom:2rem;position:relative;overflow:hidden;}
+.domain-header::after{content:'';position:absolute;top:0;bottom:0;left:0;width:4px;background:var(--gold);}
+.domain-num{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
+.domain-name{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;font-weight:700;color:white;margin-bottom:.2rem;}
+.domain-framework{font-family:'DM Sans',sans-serif;font-size:.75rem;color:rgba(240,230,210,.55);font-style:italic;}
+
+/* SCALE */
+.scale-legend{display:flex;gap:0;margin-bottom:1.75rem;border:1px solid var(--ink-20);overflow:hidden;}
+.scale-legend-item{flex:1;padding:.5rem .25rem;text-align:center;background:var(--cream-dk);border-right:1px solid var(--ink-20);}
+.scale-legend-item:last-child{border-right:none}
+.scale-legend-num{font-family:'Playfair Display',Georgia,serif;font-size:1rem;font-weight:700;color:var(--forest);display:block;}
+.scale-legend-lbl{font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:500;color:var(--ink-60);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:.1rem;}
+
+/* QUESTIONS */
+.question-block{padding:1.5rem 0;border-bottom:1px solid var(--ink-20);}
+.question-block:last-of-type{border-bottom:none}
+.q-text{font-family:'Libre Baskerville',Georgia,serif;font-size:.98rem;line-height:1.7;color:var(--ink);margin-bottom:1rem;}
+.q-num{font-family:'DM Sans',sans-serif;font-size:.7rem;font-weight:700;color:var(--gold);margin-right:.5rem;}
+.rating-btns{display:flex;gap:.5rem;flex-wrap:wrap;}
+.rating-btn{width:56px;height:52px;border:1.5px solid var(--ink-20);background:white;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:all .15s;font-family:'Playfair Display',Georgia,serif;font-size:1.15rem;font-weight:700;color:var(--ink-60);gap:2px;}
+.rating-btn .r-label{font-family:'DM Sans',sans-serif;font-size:.5rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-60);line-height:1;}
+.rating-btn:hover{border-color:var(--forest);color:var(--forest);background:rgba(46,107,74,.04);}
+.rating-btn.selected{background:var(--forest);border-color:var(--forest);color:white;}
+.rating-btn.selected .r-label{color:rgba(255,255,255,.7)}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2.5rem;padding-top:2rem;border-top:1px solid var(--ink-20);}
+.q-nav-info{font-family:'DM Sans',sans-serif;font-size:.75rem;color:var(--ink-60);}
+
+/* RESULTS */
+.results-header{background:var(--forest-dk);padding:3rem;margin-bottom:2.5rem;text-align:center;position:relative;overflow:hidden;}
+.results-header::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(184,134,11,.1),transparent);}
+.results-eyebrow{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;position:relative;}
+.results-score-num{font-family:'Playfair Display',Georgia,serif;font-size:clamp(4rem,10vw,7rem);font-weight:700;color:white;line-height:1;position:relative;}
+.results-score-denom{font-family:'DM Sans',sans-serif;font-size:1rem;color:rgba(240,230,210,.5);margin-left:.25rem;}
+.results-band{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-style:italic;color:var(--gold-lt);margin-top:.5rem;position:relative;}
+.results-band-box{border-left:4px solid var(--gold);padding:1.5rem 1.75rem;background:rgba(46,107,74,.06);margin-bottom:2rem;}
+.band-label{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--forest);margin-bottom:.5rem;}
+.band-title{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--ink);margin-bottom:.6rem;}
+.band-desc{font-family:'Libre Baskerville',Georgia,serif;font-size:.95rem;line-height:1.8;color:var(--ink-60);}
+.breakdown-title{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-60);margin-bottom:1rem;}
+.domain-bar-track{height:6px;background:var(--ink-20);position:relative;overflow:hidden;}
+.domain-bar-fill{height:100%;background:var(--gold);transition:width .8s cubic-bezier(.16,1,.3,1);}
+
+/* PROPOSAL CTA */
+.proposal-cta{
+  background:var(--forest-dk);
+  padding:2.5rem;
+  margin-top:2.5rem;
+}
+.proposal-cta-eyebrow{
+  font-family:'DM Sans',sans-serif;font-size:.65rem;
+  font-weight:500;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1rem;
+}
+.proposal-cta h3{
+  font-family:'Playfair Display',Georgia,serif;
+  font-size:1.6rem;font-style:italic;
+  color:white;margin-bottom:.75rem;line-height:1.2;
+}
+.proposal-cta p{
+  font-family:'DM Sans',sans-serif;font-size:.9rem;
+  color:rgba(240,230,210,.65);line-height:1.7;
+  margin-bottom:1.75rem;max-width:52ch;
+}
+.proposal-actions{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;}
+.proposal-or{
+  font-family:'DM Sans',sans-serif;font-size:.75rem;
+  color:rgba(240,230,210,.35);
+}
+.proposal-email-link{
+  font-family:'DM Sans',sans-serif;font-size:.85rem;
+  color:var(--gold-lt);text-decoration:none;
+  transition:color .2s;
+}
+.proposal-email-link:hover{color:white}
+
+.error-msg{font-family:'DM Sans',sans-serif;font-size:.78rem;color:#c0392b;margin-top:.35rem;display:none;}
+
+@media(max-width:600px){
+  .form-row{grid-template-columns:1fr}
+  .rating-btns{gap:.35rem}
+  .rating-btn{width:48px;height:46px;font-size:1rem}
+  .q-nav{flex-direction:column;gap:1rem;align-items:stretch}
+  .q-nav .btn{justify-content:center}
+  .proposal-actions{flex-direction:column}
+  .btn-lg{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="header-logo">
+      <img src="soaring-scholars-logo.png" alt="Soaring Scholars LLC"/>
+    </a>
+    <a href="index.html" class="header-back">← Back to Site</a>
+  </div>
+</header>
+
+<div class="page">
+
+<!-- SCREEN 1: INTRO -->
+<div class="screen active" id="screenIntro">
+  <div class="intro-badge">
+    <span>For Principals & Campus Leaders</span>
+  </div>
+  <h1 class="intro-h1">
+    <em>Principal Leadership</em><br>Curriculum Readiness Assessment
+  </h1>
+  <p class="intro-sub">
+    This assessment measures two things equally: how well you understand your campus's research-based curriculum, and how effectively you are supporting and coaching teachers through implementation. Answer honestly. This is a reflective diagnostic, not an evaluation.
+  </p>
+  <div class="intro-meta">
+    <div class="meta-item"><strong>20</strong><span>Questions</span></div>
+    <div class="meta-item"><strong>5</strong><span>Domains</span></div>
+    <div class="meta-item"><strong>10 min</strong><span>To Complete</span></div>
+    <div class="meta-item"><strong>Free</strong><span>No Cost</span></div>
+  </div>
+  <div class="intro-form">
+    <div class="form-row">
+      <div class="field-wrap">
+        <label class="field-label" for="i_fn">First Name</label>
+        <input class="field-input" id="i_fn" type="text" placeholder="First Name"/>
+      </div>
+      <div class="field-wrap">
+        <label class="field-label" for="i_ln">Last Name</label>
+        <input class="field-input" id="i_ln" type="text" placeholder="Last Name"/>
+      </div>
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="i_em">Work Email</label>
+      <input class="field-input" id="i_em" type="email" placeholder="you@district.edu"/>
+      <span class="error-msg" id="emError">Please enter a valid email address.</span>
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="i_ro">Your Role</label>
+      <select class="field-select" id="i_ro">
+        <option value="" disabled selected>Select your role</option>
+        <option>Campus Principal</option>
+        <option>Assistant Principal</option>
+        <option>Dean of Instruction</option>
+        <option>District Curriculum Director</option>
+        <option>Deputy / Associate Superintendent</option>
+        <option>Superintendent</option>
+        <option>Other Leader</option>
+      </select>
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="i_di">District / Campus</label>
+      <input class="field-input" id="i_di" type="text" placeholder="e.g. Birdville ISD"/>
+    </div>
+    <div class="field-wrap">
+      <label class="field-label" for="i_sz">Campus / District Size</label>
+      <select class="field-select" id="i_sz">
+        <option value="" disabled selected>Select size</option>
+        <option>1 campus (under 400 students)</option>
+        <option>1 campus (400–800 students)</option>
+        <option>1 campus (800+ students)</option>
+        <option>2–5 campuses</option>
+        <option>6–15 campuses</option>
+        <option>16+ campuses</option>
+      </select>
+    </div>
+  </div>
+  <button class="btn btn-forest btn-lg" onclick="startAssessment()">
+    Begin Leadership Assessment
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </button>
+  <p style="font-family:'DM Sans',sans-serif;font-size:.75rem;color:var(--ink-60);margin-top:1rem;">
+    Results are used only to customize your proposal and will never be shared.
+  </p>
+</div>
+
+<!-- SCREEN 2: QUESTIONS -->
+<div class="screen" id="screenQuestions">
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="progress-label">Your Progress</span>
+      <span class="progress-count" id="progressCount">0 / 20 answered</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  </div>
+  <div id="domainContainer"></div>
+  <div class="q-nav">
+    <button class="btn btn-outline" id="btnPrev" onclick="prevDomain()" style="display:none">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Previous
+    </button>
+    <span class="q-nav-info" id="navInfo">Domain 1 of 5</span>
+    <button class="btn btn-forest" id="btnNext" onclick="nextDomain()">
+      Next Domain
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</div>
+
+<!-- SCREEN 3: RESULTS -->
+<div class="screen" id="screenResults">
+  <div class="results-header">
+    <p class="results-eyebrow">Leadership Assessment Results · Soaring Scholars LLC</p>
+    <div class="results-score-num" id="rScoreNum">0<span class="results-score-denom">/ 80</span></div>
+    <div class="results-band" id="rBandName"></div>
+  </div>
+
+  <div class="results-band-box">
+    <div class="band-label" id="rBandLabel">Score Band</div>
+    <div class="band-title" id="rBandTitle"></div>
+    <div class="band-desc" id="rBandDesc"></div>
+  </div>
+
+  <p class="breakdown-title">Score by Domain</p>
+  <div style="display:flex;flex-direction:column;gap:.75rem;margin-bottom:2.5rem" id="domainBars"></div>
+
+  <!-- PROPOSAL CTA — appears instead of Calendly for leaders -->
+  <div class="proposal-cta">
+    <p class="proposal-cta-eyebrow">Your Next Step</p>
+    <h3 id="ctaTitle">You Have Your Score.<br>Let's Build Your Campus Plan.</h3>
+    <p id="ctaBody">A leadership score without a strategy is just data. Soaring Scholars LLC builds campus-specific implementation proposals for leaders, tailored to your score, your team size, and your district's goals.</p>
+    <div class="proposal-actions">
+      <a href="mailto:Janelle@soaringscholars.org?subject=District Proposal Request&body=Hi Janelle, I just completed the Principal Leadership Assessment. My score was [INSERT SCORE]. I'd like to learn more about a proposal for my campus/district." class="btn btn-gold btn-lg">
+        Request a District Proposal
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <span class="proposal-or">or</span>
+      <a href="https://calendly.com/janelle-soaringscholars/30min" target="_blank" class="proposal-email-link">Book a 30-min discovery call instead →</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const DOMAINS = [
+  {
+    num:1,
+    name:"Curriculum Knowledge & Strategic Vision",
+    framework:"Understanding the 'why' behind your research-based curriculum",
+    max:20,
+    questions:[
+      "I can articulate the instructional vision and design principles behind our research-based curriculum to my teachers.",
+      "I have read and engaged with the teacher-facing materials deeply enough to recognize strong and weak implementation when I observe it.",
+      "I understand the scope and sequence of our curriculum and can explain how units build on each other across grade levels.",
+      "I can distinguish between a teacher making a curriculum-aligned modification and a teacher replacing curriculum content.",
+      "I know which curriculum components are non-negotiable and which allow for teacher discretion."
+    ]
+  },
+  {
+    num:2,
+    name:"Teacher Support & Instructional Coaching",
+    framework:"Actively developing teachers through implementation",
+    max:20,
+    questions:[
+      "I conduct regular instructional observations specifically focused on curriculum implementation fidelity, not just general teaching quality.",
+      "After observations, I provide specific, curriculum-grounded feedback, not generic instructional feedback.",
+      "I have established a coaching or support system (instructional coach, PLCs, co-planning) that directly addresses curriculum implementation.",
+      "I follow up on coaching feedback within two instructional cycles to monitor whether teachers applied it.",
+      "My teachers know I value curriculum fidelity as a professional expectation, not a compliance checklist."
+    ]
+  },
+  {
+    num:3,
+    name:"Implementation Monitoring & Data Use",
+    framework:"Using evidence to drive campus-wide implementation decisions",
+    max:16,
+    questions:[
+      "I use curriculum-embedded assessment data to identify which teachers and grade levels need implementation support.",
+      "I can connect campus-level student performance trends to specific instructional practices or curriculum gaps.",
+      "I review lesson plans or pacing guides regularly to ensure teachers are implementing the curriculum as designed.",
+      "I use observation data across classrooms to identify patterns in implementation strength and weakness campus-wide."
+    ]
+  },
+  {
+    num:4,
+    name:"Systems & Structures for Sustainability",
+    framework:"Building the infrastructure that makes implementation last",
+    max:12,
+    questions:[
+      "My campus has a dedicated, protected time structure for collaborative curriculum planning (PLCs, co-planning, curriculum unpacking).",
+      "New teachers at my campus receive structured onboarding to our research-based curriculum before teaching it independently.",
+      "I have built internal leadership capacity (lead teachers, instructional coaches, department heads) who can sustain implementation when I am not present."
+    ]
+  },
+  {
+    num:5,
+    name:"Leadership Culture & Professional Commitment",
+    framework:"Modeling the commitment you expect from your teachers",
+    max:12,
+    questions:[
+      "I model learning alongside my teachers, attending professional development, engaging in curriculum study, and publicly acknowledging my own growth areas.",
+      "I protect instructional time from campus interruptions and non-instructional demands that compromise curriculum delivery.",
+      "I celebrate and publicly recognize teachers who demonstrate strong curriculum implementation, making fidelity a cultural norm not just a mandate."
+    ]
+  }
+];
+
+const SCALE_LABELS=['Not Yet','Emerging','Developing','Consistent'];
+
+const BANDS=[
+  {min:0, max:39, band:"Building Awareness",    title:"Building Awareness",
+   desc:"Your campus has foundational work ahead in both curriculum knowledge and teacher support systems. This is an excellent starting point for a comprehensive partnership. Soaring Scholars LLC specializes in exactly this stage, building the leadership foundation that makes implementation sustainable."},
+  {min:40,max:54, band:"Developing Capacity",   title:"Developing Capacity",
+   desc:"You have momentum and some strong structures in place, but implementation is inconsistent across classrooms. A targeted semester partnership focused on coaching systems, observation cycles, and data use would have the highest impact right now."},
+  {min:55,max:68, band:"Leading with Intention", title:"Leading with Intention",
+   desc:"Your campus shows intentional leadership with clear pockets of excellence. The opportunity now is to systematize what your strongest classrooms are doing and spread it campus-wide. A fidelity partnership would help you make consistency the standard."},
+  {min:69,max:80, band:"Model Campus Ready",     title:"Model Campus Ready",
+   desc:"Your campus demonstrates strong leadership fidelity across both curriculum knowledge and teacher support. You are positioned to become a model campus. Let's build a proposal for a partnership that elevates your district and your leadership legacy."}
+];
+
+let answers={}, currentDomain=0, userData={};
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function getGlobalQNum(dIdx,qIdx){
+  let n=0;
+  for(let i=0;i<dIdx;i++) n+=DOMAINS[i].questions.length;
+  return n+qIdx+1;
+}
+
+function getTotalAnswered(){return Object.keys(answers).length;}
+function getTotalQuestions(){return DOMAINS.reduce((s,d)=>s+d.questions.length,0);}
+function getDomainScore(dIdx){
+  let s=0;
+  DOMAINS[dIdx].questions.forEach((_,qi)=>{s+=answers[`d${dIdx}_q${qi}`]||0;});
+  return s;
+}
+function getTotalScore(){return DOMAINS.reduce((_,__,i)=>_+getDomainScore(i),0);}
+function getBand(score){return BANDS.find(b=>score>=b.min&&score<=b.max)||BANDS[0];}
+
+function updateProgress(){
+  const answered=getTotalAnswered(), total=getTotalQuestions();
+  const pct=Math.round(answered/total*100);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressCount').textContent=answered+' / '+total+' answered';
+}
+
+function startAssessment(){
+  const fn=document.getElementById('i_fn').value.trim();
+  const ln=document.getElementById('i_ln').value.trim();
+  const em=document.getElementById('i_em').value.trim();
+  const emEl=document.getElementById('i_em');
+  const emErr=document.getElementById('emError');
+  if(!fn||!em){
+    if(!fn)document.getElementById('i_fn').style.borderColor='#c0392b';
+    if(!em){emEl.style.borderColor='#c0392b';emErr.style.display='block';}
+    return;
+  }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){
+    emEl.style.borderColor='#c0392b';emErr.style.display='block';return;
+  }
+  userData={
+    fn,ln,em,
+    role:document.getElementById('i_ro').value,
+    district:document.getElementById('i_di').value.trim(),
+    size:document.getElementById('i_sz').value
+  };
+  currentDomain=0;
+  renderDomain(0);
+  show('screenQuestions');
+}
+
+function renderDomain(dIdx){
+  const d=DOMAINS[dIdx];
+  const container=document.getElementById('domainContainer');
+  let html=`
+    <div class="domain-header">
+      <div class="domain-num">Domain ${d.num} of ${DOMAINS.length}</div>
+      <div class="domain-name">${d.name}</div>
+      <div class="domain-framework">${d.framework}</div>
+    </div>
+    <div class="scale-legend">
+      ${[1,2,3,4].map((n,i)=>`
+        <div class="scale-legend-item">
+          <span class="scale-legend-num">${n}</span>
+          <span class="scale-legend-lbl">${SCALE_LABELS[i]}</span>
+        </div>`).join('')}
+    </div>
+  `;
+  d.questions.forEach((q,qi)=>{
+    const key=`d${dIdx}_q${qi}`;
+    const gNum=getGlobalQNum(dIdx,qi);
+    html+=`
+      <div class="question-block" id="qblock_${key}">
+        <p class="q-text"><span class="q-num">${gNum}.</span>${q}</p>
+        <div class="rating-btns">
+          ${[1,2,3,4].map((val,i)=>`
+            <button class="rating-btn ${answers[key]===val?'selected':''}"
+              onclick="selectRating('${key}',${val},this)">
+              ${val}
+              <span class="r-label">${SCALE_LABELS[i]}</span>
+            </button>`).join('')}
+        </div>
+      </div>
+    `;
+  });
+  container.innerHTML=html;
+  document.getElementById('btnPrev').style.display=dIdx>0?'flex':'none';
+  const isLast=dIdx===DOMAINS.length-1;
+  const nextBtn=document.getElementById('btnNext');
+  nextBtn.innerHTML=isLast
+    ?`See My Results <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`
+    :`Next Domain <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
+  document.getElementById('navInfo').textContent=`Domain ${dIdx+1} of ${DOMAINS.length}`;
+  updateProgress();
+}
+
+function selectRating(key,val,btn){
+  answers[key]=val;
+  btn.closest('.rating-btns').querySelectorAll('.rating-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+  updateProgress();
+}
+
+function nextDomain(){
+  const d=DOMAINS[currentDomain];
+  const unanswered=d.questions.filter((_,qi)=>!answers[`d${currentDomain}_q${qi}`]);
+  if(unanswered.length>0){
+    d.questions.forEach((_,qi)=>{
+      const key=`d${currentDomain}_q${qi}`;
+      if(!answers[key]){
+        const el=document.getElementById('qblock_'+key);
+        if(el){
+          el.style.background='rgba(184,134,11,.06)';
+          el.style.borderLeft='3px solid var(--gold)';
+          el.style.paddingLeft='1rem';
+          setTimeout(()=>{el.style.background='';el.style.borderLeft='';el.style.paddingLeft='';},3000);
+        }
+      }
+    });
+    return;
+  }
+  if(currentDomain<DOMAINS.length-1){
+    currentDomain++;
+    renderDomain(currentDomain);
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    showResults();
+  }
+}
+
+function prevDomain(){
+  if(currentDomain>0){currentDomain--;renderDomain(currentDomain);window.scrollTo({top:0,behavior:'smooth'});}
+}
+
+function showResults(){
+  const total=getTotalScore();
+  const band=getBand(total);
+
+  document.getElementById('rScoreNum').innerHTML=`${total}<span class="results-score-denom">/ 80</span>`;
+  document.getElementById('rBandName').textContent=band.band;
+  document.getElementById('rBandLabel').textContent=`Score ${band.min}–${band.max}`;
+  document.getElementById('rBandTitle').textContent=band.title;
+  document.getElementById('rBandDesc').textContent=band.desc;
+
+  // Customize CTA based on score
+  const ctaTitle=document.getElementById('ctaTitle');
+  const ctaBody=document.getElementById('ctaBody');
+  if(total<=39){
+    ctaTitle.innerHTML="Let's Build Your<br>Foundation Together.";
+    ctaBody.textContent="Your results show an opportunity for a comprehensive partnership. Soaring Scholars LLC will build you a custom proposal that addresses both curriculum knowledge and teacher support, designed specifically for your campus size and context.";
+  } else if(total<=54){
+    ctaTitle.innerHTML="You Have Momentum.<br>Let's Make It Stick.";
+    ctaBody.textContent="Your campus is moving in the right direction. A targeted Soaring Scholars partnership would give you the coaching systems and observation frameworks to lock in that momentum across every classroom.";
+  } else if(total<=68){
+    ctaTitle.innerHTML="Your Campus Is Ready<br>for the Next Level.";
+    ctaBody.textContent="Strong leadership is showing. A proposal tailored to your score will help you move from strong pockets of excellence to campus-wide consistency and position your campus as a model for your district.";
+  } else {
+    ctaTitle.innerHTML="You're Leading a<br>Model Campus.";
+    ctaBody.textContent="Your results demonstrate exceptional leadership fidelity. Let's build a proposal that expands your impact, whether through a multi-campus partnership, district-level training, or a model campus designation.";
+  }
+
+  // Update mailto link with actual score
+  const mailLink=document.querySelector('.proposal-cta a[href^="mailto"]');
+  if(mailLink){
+    mailLink.href=`mailto:Janelle@soaringscholars.org?subject=District Proposal Request Score ${total}&body=Hi Janelle,%0A%0AI just completed the Principal Leadership Curriculum Readiness Assessment.%0A%0AName: ${userData.fn} ${userData.ln}%0ARole: ${userData.role}%0ADistrict: ${userData.district}%0ACampus Size: ${userData.size}%0ATotal Score: ${total}/80%0AResults Band: ${band.band}%0A%0ADomain Breakdown:%0A${DOMAINS.map((d,i)=>d.name+': '+getDomainScore(i)+'/'+d.max).join('%0A')}%0A%0AI would like to request a custom proposal for my campus/district.`;
+  }
+
+  // Domain bars
+  const barsHtml=DOMAINS.map((d,i)=>{
+    const s=getDomainScore(i);
+    const pct=Math.round(s/d.max*100);
+    return `
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.35rem;">
+          <span style="font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:500;color:var(--ink);">${d.name}</span>
+          <span style="font-family:'Playfair Display',Georgia,serif;font-size:.9rem;font-weight:700;color:var(--forest);white-space:nowrap;margin-left:1rem;">${s} / ${d.max}</span>
+        </div>
+        <div class="domain-bar-track">
+          <div class="domain-bar-fill" style="width:0%" data-pct="${pct}"></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('domainBars').innerHTML=barsHtml;
+
+  show('screenResults');
+  setTimeout(()=>{
+    document.querySelectorAll('.domain-bar-fill').forEach(el=>{el.style.width=el.dataset.pct+'%';});
+  },100);
+}
+</script>
+</body>
+</html>
