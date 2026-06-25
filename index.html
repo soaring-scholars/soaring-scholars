@@ -88,6 +88,15 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.8rem
 .hero-image-wrap { position: relative; height: 100vh; overflow: hidden; z-index: 0; }
 .hero-image-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 .hero-image-wrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, var(--navy) 0%, rgba(90,122,82,0.15) 40%, transparent 65%); }
+.hero-newsletter-form { margin-bottom: 1.1rem; }
+.hero-newsletter-row { display: flex; gap: 0.55rem; flex-wrap: wrap; }
+.hero-newsletter-row input { flex: 1; min-width: 140px; padding: 0.78rem 1rem; border: 1.5px solid rgba(201,168,76,0.45); border-radius: 4px; background: rgba(255,255,255,0.08); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; }
+.hero-newsletter-row input::placeholder { color: rgba(255,255,255,0.42); }
+.hero-newsletter-row input:focus { outline: none; border-color: var(--gold); background: rgba(255,255,255,0.12); }
+.hero-newsletter-row button { background: var(--gold); color: var(--navy); border: none; padding: 0.78rem 1.5rem; border-radius: 4px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
+.hero-newsletter-row button:hover { background: var(--gold-light); }
+.hero-consult-link { font-size: 0.84rem; color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; display: inline-block; margin-bottom: 1.5rem; }
+.hero-consult-link:hover { color: var(--gold); }
 .scroll-arrow { margin-top: 2.5rem; cursor: pointer; animation: bounce 2s infinite; display: block; opacity: 0.85; transition: opacity 0.2s; }
 .scroll-arrow:hover { opacity: 1; }
 @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
@@ -97,6 +106,8 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.8rem
   .hero h1 { text-align: center; font-size: clamp(2rem, 7vw, 2.8rem); }
   .hero-sub { text-align: center; max-width: 100%; }
   .hero-buttons { justify-content: center; }
+  .hero-newsletter-row { flex-direction: column; }
+  .hero-newsletter-row input, .hero-newsletter-row button { width: 100%; }
   .hero-image-wrap { height: 60vw; min-height: 260px; }
   .hero-image-wrap::after { background: linear-gradient(to bottom, var(--navy) 0%, transparent 25%); }
 }
@@ -441,10 +452,17 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.8rem
       <span class="eyebrow">Education Concierge &amp; Instructional Leader</span>
       <h1>Your Partner in<br /><em>Academic Excellence.</em></h1>
       <p class="hero-sub">Soaring Scholars connects parents, teachers, and community members to the right experts, resources, and support so every child can thrive.</p>
-      <div class="hero-buttons">
-        <a href="https://calendly.com/janelle-soaringscholars/connection" target="_blank" class="btn-primary">Book a Consultation</a>
-        <a onclick="showPage('community')" class="btn-outline">Get Concierge Support</a>
-      </div>
+      <form id="hero-newsletter-form" class="hero-newsletter-form">
+        <input type="hidden" name="_subject" value="New Soaring Scholars Newsletter Signup">
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="hero-newsletter-row">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email address" required />
+          <button type="submit" id="hero-newsletter-btn">Subscribe</button>
+        </div>
+        <p id="hero-newsletter-status" style="margin-top:0.6rem;font-size:0.82rem;color:var(--gold);"></p>
+      </form>
+      <a href="https://calendly.com/janelle-soaringscholars/connection" target="_blank" class="hero-consult-link">Or book a free 30-min consultation &rarr;</a>
       <!-- Scroll indicator -->
       <div class="scroll-arrow" onclick="document.getElementById('home-gap').scrollIntoView({behavior:'smooth'})">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -573,45 +591,6 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.8rem
       <div class="t-cta">
         <a onclick="showPage('contact')">Share Your Experience</a>
       </div>
-    </div>
-  </section>
-
-  <section class="newsletter-section" id="newsletter">
-    <div class="newsletter-inner">
-      <p class="section-label">Newsletter</p>
-      <h2>Stay in the Know. <em>Stay Ahead.</em></h2>
-      <p>Subscribe to the Soaring Scholars newsletter and receive upcoming workshop announcements, advocacy tools, and education resources directly to your inbox.</p>
-      <form id="home-newsletter-form" class="newsletter-form-full">
-        <input type="hidden" name="_subject" value="New Soaring Scholars Newsletter Signup">
-        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-        <div class="newsletter-row">
-          <input type="text" name="name" placeholder="Your name" required />
-          <input type="email" name="email" placeholder="Enter your email address" required />
-        </div>
-        <div class="newsletter-row">
-          <select name="role">
-            <option value="">I am a&hellip; (optional)</option>
-            <option value="Parent">Parent / Guardian</option>
-            <option value="Teacher">Teacher</option>
-            <option value="Coach">Instructional Coach</option>
-            <option value="Admin">Administrator</option>
-            <option value="Community Leader">Community Leader</option>
-            <option value="Other">Other</option>
-          </select>
-          <select name="support">
-            <option value="">Looking for&hellip; (optional)</option>
-            <option value="Academic Support">Academic support for my child/students</option>
-            <option value="Coaching/PD">Coaching or professional development</option>
-            <option value="Mentorship">Mentorship opportunities</option>
-            <option value="Community Resources">Community resources/partnerships</option>
-            <option value="Volunteering">Ways to volunteer or give back</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-        <button type="submit" id="home-newsletter-btn">Subscribe</button>
-        <p id="home-newsletter-status" style="margin-top:0.9rem;font-size:0.85rem;"></p>
-      </form>
-      <div class="newsletter-tags"><span class="newsletter-tag">Workshop Announcements</span><span class="newsletter-tag">Expert Referrals</span><span class="newsletter-tag">STEM Events</span><span class="newsletter-tag">Advocacy Tips</span></div>
     </div>
   </section>
 
@@ -1307,16 +1286,16 @@ function closeMobile() {
 function goToNewsletter() {
   showPage('home');
   setTimeout(function() {
-    var el = document.getElementById('newsletter');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var el = document.getElementById('hero-newsletter-form');
+    if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.querySelector('input').focus(); }
   }, 60);
 }
 
 /* Home page newsletter signup */
-document.getElementById('home-newsletter-form').addEventListener('submit', async function(e) {
+document.getElementById('hero-newsletter-form').addEventListener('submit', async function(e) {
   e.preventDefault();
-  var btn = document.getElementById('home-newsletter-btn');
-  var status = document.getElementById('home-newsletter-status');
+  var btn = document.getElementById('hero-newsletter-btn');
+  var status = document.getElementById('hero-newsletter-status');
   status.textContent = '';
   btn.disabled = true; btn.textContent = 'Subscribing...';
   try {
@@ -1325,7 +1304,7 @@ document.getElementById('home-newsletter-form').addEventListener('submit', async
     });
     if (res.ok) {
       status.style.color = 'var(--gold)';
-      status.textContent = "You're in! Thanks for joining.";
+      status.textContent = "You're in! Welcome to the Soaring Scholars community.";
       e.target.reset();
     } else {
       status.style.color = '#e08a8a';
