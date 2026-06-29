@@ -1148,10 +1148,19 @@ footer { background: var(--navy); color: rgba(255,255,255,0.55); padding: 2.8rem
   </section>
   <section style="padding:5rem 2rem;background:var(--white);">
     <div class="section-inner">
-      <p class="section-label">Free Resource</p>
-      <h2 class="section-title">Know Exactly Where Your <em>Campus Stands.</em></h2>
+      <p class="section-label">Free Resources</p>
+      <h2 class="section-title">Two Tools to Know <em>Exactly Where You Stand.</em></h2>
       <div class="resource-box">
-        <div class="resource-cta"><p>Available for teachers, instructional coaches, and campus principals.</p><a href="https://soaringscholars.org/assessment.html" target="_blank" class="btn-primary">Take the Free Assessment</a></div>
+        <div>
+          <h3>Curriculum Readiness <em>Assessment</em></h3>
+          <p>Know where your campus sits on the implementation fidelity continuum. Built for teachers, instructional coaches, and campus principals.</p>
+          <div class="resource-cta"><a href="assessment.html" target="_blank" class="btn-primary">Take the Assessment</a></div>
+        </div>
+        <div>
+          <h3>Teacher Identity <em>Reflection</em></h3>
+          <p>Understand your natural tendencies before you walk through the door. The RCAM Reflection names your relationship style, response to challenge, cultural awareness, and communication approach — 12 questions, instant results.</p>
+          <div class="resource-cta"><a href="RCAM_Teacher_Identity_Profile.html" class="btn-dark">Start the Reflection</a></div>
+        </div>
       </div>
     </div>
   </section>
@@ -1311,7 +1320,7 @@ document.getElementById('hero-newsletter-form').addEventListener('submit', async
   status.textContent = '';
   btn.disabled = true; btn.textContent = 'Subscribing...';
   try {
-    var res = await fetch('https://formspree.io/f/xbdvdvlz', {
+    var res = await fetch('https://formspree.io/f/xgojzevb', {
       method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' }
     });
     if (res.ok) {
@@ -1337,7 +1346,7 @@ document.getElementById('community-newsletter-form').addEventListener('submit', 
   status.textContent = '';
   btn.disabled = true; btn.textContent = 'Subscribing...';
   try {
-    var res = await fetch('https://formspree.io/f/xbdvdvlz', {
+    var res = await fetch('https://formspree.io/f/xgojzevb', {
       method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' }
     });
     if (res.ok) {
@@ -1367,7 +1376,7 @@ document.getElementById('community-assessment-form').addEventListener('submit', 
   var emailField = e.target.querySelector('[name="email"]');
   if (emailField) document.getElementById('assessment-replyto').value = emailField.value;
   try {
-    var res = await fetch('https://formspree.io/f/xeewzjzg', {
+    var res = await fetch('https://formspree.io/f/xgojzevb', {
       method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' }
     });
     if (res.ok) { e.target.style.display = 'none'; success.style.display = 'block'; }
@@ -1384,7 +1393,7 @@ document.getElementById('teacher-assessment-form').addEventListener('submit', as
   error.style.display = 'none';
   btn.disabled = true; btn.textContent = 'Sending...';
   try {
-    var res = await fetch('https://formspree.io/f/xeewzjzg', {
+    var res = await fetch('https://formspree.io/f/xgojzevb', {
       method: 'POST', body: new FormData(e.target), headers: { 'Accept': 'application/json' }
     });
     if (res.ok) { e.target.style.display = 'none'; success.style.display = 'block'; }
@@ -1413,7 +1422,7 @@ document.getElementById('review-form').addEventListener('submit', async function
   btn.textContent = 'Sending...';
   var formData = new FormData(e.target);
   try {
-    var response = await fetch('https://formspree.io/f/xeewzjzg', {
+    var response = await fetch('https://formspree.io/f/xgojzevb', {
       method: 'POST',
       body: formData,
       headers: { 'Accept': 'application/json' }

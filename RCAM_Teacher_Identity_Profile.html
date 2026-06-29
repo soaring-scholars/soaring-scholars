@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Soaring Scholars: Teacher Identity Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=Inter:wght@300;400;500;600&family=Barlow+Condensed:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --forest:  #3B5E45;
+    --sage:    #6B8F71;
+    --sage-lt: #A8C5AD;
+    --clay:    #A0714F;
+    --tan:     #C9A87C;
+    --linen:   #F5EFE6;
+    --warm:    #E8E0D5;
+    --mid-gy:  #BBAEA0;
+    --dk-gy:   #5C5147;
+    --black:   #1A1510;
+    --white:   #FFFFFF;
+    --rust:    #7D3F2A;
+    --amber:   #8B6914;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--linen);
+    font-family: 'Inter', sans-serif;
+    color: var(--black);
+    min-height: 100vh;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar-wrap {
+    position: fixed; top: 0; left: 0; width: 100%; height: 4px;
+    background: var(--warm); z-index: 100;
+  }
+  .progress-bar-fill {
+    height: 100%; background: var(--tan);
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: flex; flex-direction: column; }
+
+  /* ── COVER ── */
+  #cover {
+    background: var(--forest);
+    align-items: stretch;
+  }
+  .cover-top {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover-top::before {
+    content: '';
+    position: absolute; top: -120px; right: -120px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: var(--sage);
+    opacity: 0.12;
+    pointer-events: none;
+  }
+  .cover-brand {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 0.22em;
+    color: var(--sage-lt); text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .cover-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--tan); margin-bottom: 16px;
+  }
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 72px);
+    font-weight: 900; line-height: 1.0;
+    color: var(--white); margin-bottom: 10px;
+  }
+  .cover-title span { color: var(--tan); }
+  .cover-rule {
+    width: 80px; height: 3px;
+    background: var(--clay); margin: 24px 0;
+  }
+  .cover-tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 15px;
+    color: var(--sage-lt); max-width: 420px;
+    line-height: 1.6;
+  }
+  .cover-dims {
+    display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px;
+  }
+  .dim-tag {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px; padding: 8px 16px;
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--sage-lt);
+  }
+  .cover-bottom {
+    background: rgba(0,0,0,0.25);
+    padding: 40px 60px;
+  }
+  .cover-bottom h3 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--tan);
+    margin-bottom: 20px;
+  }
+  .cover-fields {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  }
+  .cover-field label {
+    display: block; font-size: 10px; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--sage-lt); margin-bottom: 6px;
+  }
+  .cover-field input {
+    width: 100%; background: transparent;
+    border: none; border-bottom: 1px solid rgba(168,197,173,0.4);
+    padding: 8px 0; font-size: 14px; font-family: 'Inter', sans-serif;
+    color: var(--white); outline: none;
+    transition: border-color 0.2s;
+  }
+  .cover-field input::placeholder { color: rgba(168,197,173,0.4); }
+  .cover-field input:focus { border-bottom-color: var(--tan); }
+  .cover-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: var(--sage-lt);
+    text-decoration: none; margin-bottom: 20px;
+    opacity: 0.7; transition: opacity 0.2s;
+  }
+  .cover-back:hover { opacity: 1; }
+  .start-btn {
+    margin-top: 36px; padding: 16px 48px;
+    background: var(--clay); color: var(--white);
+    border: none; border-radius: 4px; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .start-btn:hover { background: var(--rust); transform: translateY(-1px); }
+  .start-btn:active { transform: translateY(0); }
+
+  /* ── QUESTION SCREEN ── */
+  #question-screen {
+    flex-direction: column;
+  }
+  .q-header {
+    background: var(--forest);
+    padding: 20px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .q-dim-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--tan);
+  }
+  .q-counter {
+    font-size: 11px; color: var(--sage-lt); font-weight: 400;
+  }
+  .q-body {
+    flex: 1; padding: 60px;
+    max-width: 820px; margin: 0 auto; width: 100%;
+  }
+  .q-dimension-strip {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 32px;
+  }
+  .q-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 18px; font-weight: 700; color: var(--white);
+    flex-shrink: 0;
+  }
+  .q-dim-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 600;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--dk-gy);
+  }
+  .q-dim-question {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 12px;
+    color: var(--mid-gy);
+  }
+  .q-scenario {
+    background: var(--white);
+    border-radius: 8px; padding: 28px 32px;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--forest);
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 16px;
+    line-height: 1.65; color: var(--black);
+  }
+  .q-options { display: flex; flex-direction: column; gap: 10px; }
+  .q-option {
+    background: var(--white);
+    border: 2px solid var(--warm);
+    border-radius: 6px; padding: 16px 20px;
+    cursor: pointer; display: flex; align-items: flex-start; gap: 14px;
+    transition: border-color 0.2s, background 0.2s, transform 0.1s;
+    font-size: 14px; line-height: 1.5; color: var(--black);
+  }
+  .q-option:hover {
+    border-color: var(--sage); background: #F0F5F1;
+    transform: translateX(3px);
+  }
+  .q-option.selected {
+    border-color: var(--forest);
+    background: #EEF5F0;
+  }
+  .q-option-letter {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--warm); display: flex;
+    align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: var(--dk-gy); flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
+  }
+  .q-option.selected .q-option-letter {
+    background: var(--forest); color: var(--white);
+  }
+  .q-nav {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-top: 36px;
+  }
+  .q-back {
+    background: transparent; border: none; cursor: pointer;
+    font-size: 13px; color: var(--mid-gy); font-family: 'Inter', sans-serif;
+    display: flex; align-items: center; gap: 6px;
+    transition: color 0.2s;
+  }
+  .q-back:hover { color: var(--dk-gy); }
+  .q-next {
+    padding: 13px 36px;
+    background: var(--forest); color: var(--white);
+    border: none; border-radius: 4px; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    opacity: 0.4; pointer-events: none;
+    transition: opacity 0.2s, background 0.2s, transform 0.1s;
+  }
+  .q-next.ready { opacity: 1; pointer-events: all; }
+  .q-next.ready:hover { background: var(--clay); transform: translateY(-1px); }
+
+  /* ── RESULTS ── */
+  #results { flex-direction: column; }
+  .results-hero {
+    background: var(--forest);
+    padding: 60px 60px 50px;
+    position: relative; overflow: hidden;
+  }
+  .results-hero::before {
+    content: ''; position: absolute;
+    top: -100px; right: -80px;
+    width: 380px; height: 380px;
+    border-radius: 50%; background: var(--sage); opacity: 0.12;
+  }
+  .results-hero-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--tan); margin-bottom: 12px;
+  }
+  .results-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 900; color: var(--white);
+    margin-bottom: 6px;
+  }
+  .results-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 16px;
+    color: var(--sage-lt);
+  }
+
+  .results-body {
+    padding: 60px;
+    max-width: 920px; margin: 0 auto; width: 100%;
+  }
+  .results-section-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--clay); margin-bottom: 24px;
+  }
+  .dim-result-card {
+    background: var(--white);
+    border-radius: 8px; overflow: hidden;
+    margin-bottom: 24px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .dim-card-header {
+    padding: 20px 28px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .dim-card-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--white); flex-shrink: 0;
+  }
+  .dim-card-meta { flex: 1; }
+  .dim-card-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--black);
+  }
+  .dim-card-style {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 13px;
+    color: var(--dk-gy); margin-top: 2px;
+  }
+  .dim-card-body { padding: 0 28px 24px; }
+  .feedback-block {
+    border-radius: 6px; padding: 16px 20px; margin-bottom: 12px;
+  }
+  .feedback-block.strength {
+    background: #EEF5F0;
+    border-left: 4px solid var(--forest);
+  }
+  .feedback-block.pitfall {
+    background: #FDF3EC;
+    border-left: 4px solid var(--clay);
+  }
+  .feedback-block.language {
+    background: #F5F0E8;
+    border-left: 4px solid var(--tan);
+  }
+  .fb-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .fb-label.strength { color: var(--forest); }
+  .fb-label.pitfall { color: var(--clay); }
+  .fb-label.language { color: var(--amber); }
+  .fb-text {
+    font-size: 13.5px; line-height: 1.65;
+    color: var(--dk-gy);
+  }
+  .feedback-block.talk {
+    background: #FBF6EC;
+    border-left: 4px solid var(--sage);
+  }
+  .fb-label.talk { color: var(--sage); }
+  .talk-prompt {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13.5px; line-height: 1.65;
+    color: var(--dk-gy);
+    margin-bottom: 4px;
+  }
+
+  .results-disclaimer {
+    background: var(--warm);
+    border-radius: 8px;
+    padding: 20px 26px;
+    margin-bottom: 28px;
+    border-left: 4px solid var(--tan);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--dk-gy);
+  }
+  .results-disclaimer strong { color: var(--black); }
+
+  /* Identity Statement */
+  .identity-statement-wrap {
+    background: var(--forest);
+    border-radius: 8px; padding: 36px 40px;
+    margin: 36px 0;
+  }
+  .is-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--tan); margin-bottom: 12px;
+  }
+  .is-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; line-height: 1.7;
+    color: var(--white);
+  }
+  .is-revisit-prompt {
+    font-family: 'Inter', sans-serif;
+    font-style: italic; font-size: 12px;
+    color: var(--sage-lt); margin-top: 14px;
+  }
+
+  /* Print / save */
+  .print-bar {
+    background: var(--warm);
+    padding: 24px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .print-note {
+    font-size: 12px; color: var(--dk-gy);
+  }
+  .print-btn {
+    padding: 12px 32px;
+    background: var(--clay); color: var(--white);
+    border: none; border-radius: 4px; cursor: pointer;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .print-btn:hover { background: var(--rust); }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .cover-top, .cover-bottom, .q-body, .results-body, .results-hero, .print-bar {
+      padding: 32px 24px;
+    }
+    .q-header { padding: 14px 24px; }
+    .cover-fields { grid-template-columns: 1fr; }
+  }
+
+  @media print {
+    .progress-bar-wrap, .q-nav, .print-bar, .start-btn { display: none !important; }
+    .screen { page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress"></div></div>
+
+<!-- ── COVER ── -->
+<div class="screen active" id="cover">
+  <div class="cover-top">
+    <p class="cover-brand">Soaring Scholars · Educational Consultant</p>
+    <p class="cover-eyebrow">The</p>
+    <h1 class="cover-title">Teacher Identity<br><span>Reflection</span></h1>
+    <div class="cover-rule"></div>
+    <p class="cover-tagline">This is not a label. It's a conversation starter, a way to notice how you already tend to think, respond, and connect before you walk through the door.</p>
+    <div class="cover-dims">
+      <span class="dim-tag">R: Relationship Style</span>
+      <span class="dim-tag">C: Response to Challenge</span>
+      <span class="dim-tag">A: Cultural Awareness</span>
+      <span class="dim-tag">M: Communication Style</span>
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <a href="index.html" class="cover-back">← Back to Site</a>
+    <h3>Your Information</h3>
+    <div class="cover-fields">
+      <div class="cover-field">
+        <label>Your Name</label>
+        <input type="text" id="teacher-name" placeholder="First and last name"/>
+      </div>
+      <div class="cover-field">
+        <label>School / Campus</label>
+        <input type="text" id="teacher-school" placeholder="School name"/>
+      </div>
+      <div class="cover-field">
+        <label>Grade Level &amp; Subject</label>
+        <input type="text" id="teacher-grade" placeholder="e.g. 3rd Grade / ELA"/>
+      </div>
+      <div class="cover-field">
+        <label>Date</label>
+        <input type="text" id="teacher-date" placeholder="MM/DD/YYYY"/>
+      </div>
+    </div>
+    <button class="start-btn" onclick="startAssessment()">Begin My Profile →</button>
+  </div>
+</div>
+
+<!-- ── QUESTION SCREEN ── -->
+<div class="screen" id="question-screen">
+  <div class="q-header">
+    <span class="q-dim-label" id="q-dim-label"></span>
+    <span class="q-counter" id="q-counter"></span>
+  </div>
+  <div class="q-body">
+    <div class="q-dimension-strip">
+      <div class="q-icon" id="q-icon"></div>
+      <div>
+        <div class="q-dim-name" id="q-dim-name"></div>
+        <div class="q-dim-question" id="q-dim-question"></div>
+      </div>
+    </div>
+    <div class="q-scenario" id="q-scenario"></div>
+    <div class="q-options" id="q-options"></div>
+    <div class="q-nav">
+      <button class="q-back" onclick="goBack()">← Back</button>
+      <button class="q-next" id="q-next" onclick="nextQuestion()">Continue →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── RESULTS ── -->
+<div class="screen" id="results">
+  <div class="results-hero">
+    <p class="results-hero-label">Your Teacher Identity Reflection</p>
+    <h1 class="results-name" id="results-name"></h1>
+    <p class="results-subtitle">Here is language to talk about: your tendencies, your pitfalls, your starting point.</p>
+  </div>
+  <div class="results-body">
+    <div class="results-disclaimer">
+      <strong>Before you read further:</strong> this reflects how you answered today, in this moment, not a fixed identity. Twelve questions cannot fully capture who you are as a teacher. Use this as a starting point for conversation with your coach or your team, not as a final word on who you are.
+    </div>
+    <p class="results-section-title">Your Four Identity Dimensions</p>
+    <div id="dim-results"></div>
+    <div class="identity-statement-wrap" id="identity-statement"></div>
+  </div>
+  <div class="print-bar">
+    <p class="print-note">Save or print your profile to share with your instructional coach.</p>
+    <button class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+  </div>
+</div>
+
+<script>
+// ── DATA ──────────────────────────────────────────────────────────────────
+const dimensions = [
+  {
+    id: "R", name: "Relationship Style",
+    talkPrompt: "Think of a student you already feel pulled toward, and one you might overlook without meaning to. What does your relationship style predict about who gets your attention first?",
+    color: "#3B5E45",
+    question: "\"How do I naturally show up with people I am responsible for?\"",
+    scenarios: [
+      {
+        text: "A student walks into your classroom on Day 1 looking closed off, arms crossed, not making eye contact.",
+        options: [
+          { text: "I smile warmly and greet them by name at the door.", type: "connector" },
+          { text: "I give them space and let them settle in on their own.", type: "observer" },
+          { text: "I check in quietly one-on-one before class starts.", type: "nurturer" },
+          { text: "I involve them in a group activity to draw them out.", type: "activator" }
+        ]
+      },
+      {
+        text: "A student tells you they don't like your class. They say it feels boring.",
+        options: [
+          { text: "I ask them what would make it better and genuinely adjust.", type: "connector" },
+          { text: "I feel hurt but keep it professional and stay the course.", type: "observer" },
+          { text: "I privately check in to understand what's going on with them.", type: "nurturer" },
+          { text: "I invite them to co-design something they'd actually enjoy.", type: "activator" }
+        ]
+      },
+      {
+        text: "You notice a student has been quieter than usual for three days in a row.",
+        options: [
+          { text: "I pull them aside and ask directly how they are doing.", type: "nurturer" },
+          { text: "I observe a few more days before doing anything.", type: "observer" },
+          { text: "I reach out to a counselor or parent right away.", type: "connector" },
+          { text: "I mention it casually in passing to keep the pressure low.", type: "activator" }
+        ]
+      }
+    ],
+    feedback: {
+      connector: {
+        style: "The Connector",
+        strength: "You build trust quickly by showing up with energy and warmth. Students feel seen by you from the first day. That early investment creates classrooms where students take risks academically because they know you are in their corner.",
+        pitfall: "Watch for: investing deeply in students who mirror your energy back to you, while students who are quiet, reserved, or closed off receive less of you. Your warmth for some is not automatically equity for all.",
+        language: "Try saying to yourself: \"I need to be as intentional with my quietest students as I am with my most talkative ones. Connection looks different for different kids.\""
+      },
+      observer: {
+        style: "The Observer",
+        strength: "You read the room before reacting. You don't overwhelm students with forced connection. You let relationships develop at a natural pace. Students who need space to trust someone feel safe with you.",
+        pitfall: "Watch for waiting too long to act when a student needs you. Your instinct to observe can look like indifference to students who need active pursuit, especially those who have been let down by adults before.",
+        language: "Try saying to yourself: \"Giving space is a skill. But some students need me to close the distance before they believe I actually care.\""
+      },
+      nurturer: {
+        style: "The Nurturer",
+        strength: "You lead with care and students feel it. You notice what others miss: the quiet withdrawal, the shift in mood, the student who hasn't eaten. Your emotional attunement is a powerful classroom tool.",
+        pitfall: "Watch for: over-functioning for students emotionally in ways that protect them from productive struggle. Students need to know you care and that you believe they can handle hard things.",
+        language: "Try saying to yourself: \"I can care deeply about a student and still hold a high expectation for them. Care and rigor are not opposites.\""
+      },
+      activator: {
+        style: "The Activator",
+        strength: "You energize rooms. You pull students into experiences before they have time to resist. Your classroom will feel alive: students will move, interact, and engage. You build belonging through shared activity.",
+        pitfall: "Watch for: using activity to avoid the slower, quieter work of individual connection. A student who is engaged in your group activity may still feel completely unknown to you.",
+        language: "Try saying to yourself: \"Belonging in the group is not the same as being known by me. I need one-on-one moments, not just group energy.\""
+      }
+    }
+  },
+  {
+    id: "C", name: "Response to Challenge",
+    talkPrompt: "Think back to the last time something genuinely went wrong in front of other people. Did your response match what you just selected here, or did you react differently than you think you would?",
+    color: "#A0714F",
+    question: "\"What is my default when something in the classroom goes wrong?\"",
+    scenarios: [
+      {
+        text: "Your lesson completely falls apart in the first 10 minutes. Students are confused and off task.",
+        options: [
+          { text: "I pivot immediately and try something completely different on the spot.", type: "adapter" },
+          { text: "I push through. I'll fix it tomorrow and be better prepared.", type: "persister" },
+          { text: "I stop and ask students what isn't making sense, then adjust.", type: "collaborator" },
+          { text: "I feel overwhelmed inside but hold it together on the outside.", type: "internalizer" }
+        ]
+      },
+      {
+        text: "A parent emails accusing you of being unfair to their child.",
+        options: [
+          { text: "I respond the same day with facts and an invitation to meet.", type: "adapter" },
+          { text: "I wait 24 hours to respond so I don't say something I'll regret.", type: "persister" },
+          { text: "I talk to my coach or mentor before responding.", type: "collaborator" },
+          { text: "I feel anxious and reread the email several times before acting.", type: "internalizer" }
+        ]
+      },
+      {
+        text: "Mid-unit, you realize your students don't have the foundation needed for what you're teaching.",
+        options: [
+          { text: "I stop and reteach the foundation, even if it sets me back.", type: "adapter" },
+          { text: "I keep going and try to fill gaps as I move forward.", type: "persister" },
+          { text: "I reach out to the grade below to understand what happened.", type: "collaborator" },
+          { text: "I quietly differentiate so students don't feel behind.", type: "internalizer" }
+        ]
+      }
+    ],
+    feedback: {
+      adapter: {
+        style: "The Adapter",
+        strength: "You stay calm and move quickly when things go sideways. Students experience you as flexible, responsive, and unshakeable. Your ability to pivot without panic is a significant classroom asset, especially in the chaotic first weeks.",
+        pitfall: "Watch for pivoting so fast that you skip the learning moment. When you move on too quickly, you don't always understand why something failed, which means it fails again.",
+        language: "Try saying to yourself: \"Before I pivot, I need to name what broke down. Adapting is not the same as understanding.\""
+      },
+      persister: {
+        style: "The Persister",
+        strength: "You follow through. You don't abandon a plan the moment it gets hard, and students benefit from your consistency and commitment. You build classroom culture through repetition and follow-through.",
+        pitfall: "Watch for pushing through moments that require you to stop. Persistence without adjustment can look like rigidity, and students who needed you to change course may stop trusting that you hear them.",
+        language: "Try saying to yourself: \"Consistency is a strength. But there is a difference between staying the course and ignoring what the data in front of me is saying.\""
+      },
+      collaborator: {
+        style: "The Collaborator",
+        strength: "You ask for help and bring others into problems. You know you don't have all the answers and you act on that. This makes you coachable, which is one of the most important traits a first-year teacher can have.",
+        pitfall: "Watch for over-consulting when a decision needs to be made quickly. Students need a teacher who can make a call in the moment, not one who always needs to run it by someone first.",
+        language: "Try saying to yourself: \"I can be coachable and decisive. I don't have to choose between asking for help and being the adult in the room.\""
+      },
+      internalizer: {
+        style: "The Internalizer",
+        strength: "You manage your emotional expression with care. Students rarely see you spiral, which creates a stable environment. You process deeply, which often leads to thoughtful, considered responses.",
+        pitfall: "Watch for carrying stress silently until it shows up in your body, your tone, or your patience with students. What you hold inside does not stay inside. It leaks into the room.",
+        language: "Try saying to yourself: \"Managing my emotions is not the same as hiding them. I need an outlet, a coach, a colleague, a practice, or I will burn out quietly.\""
+      }
+    }
+  },
+  {
+    id: "A", name: "Cultural Awareness",
+    talkPrompt: "What is one assumption about a 'good student' or a 'good classroom' that you grew up with, that you have never actually questioned? Where did that assumption come from?",
+    color: "#6B8F71",
+    question: "\"What assumptions am I bringing into the classroom that I haven't examined yet?\"",
+    scenarios: [
+      {
+        text: "A student consistently calls out answers without raising their hand. Their answers are correct and they are clearly engaged.",
+        options: [
+          { text: "I redirect them to raise their hand, since the expectation applies to everyone.", type: "structured" },
+          { text: "I privately ask them about their home environment to understand the behavior.", type: "curious" },
+          { text: "I adjust how I run discussions to give more space for spontaneous response.", type: "adaptive" },
+          { text: "I acknowledge their answers while teaching them the classroom norm gradually.", type: "bridging" }
+        ]
+      },
+      {
+        text: "A parent communicates with you primarily through their older child because of a language barrier.",
+        options: [
+          { text: "I find a translator, since the child should not be in the middle.", type: "structured" },
+          { text: "I ask the child questions to understand what the parent is trying to tell me.", type: "curious" },
+          { text: "I use a translation app and accept that communication will be imperfect.", type: "adaptive" },
+          { text: "I work with both the child and the parent to build a system that works.", type: "bridging" }
+        ]
+      },
+      {
+        text: "A student avoids eye contact with you while speaking, which is different from what you grew up associating with respect or attentiveness.",
+        options: [
+          { text: "I gently coach them to make eye contact, since that's the expectation in most academic and workplace settings.", type: "structured" },
+          { text: "I ask a colleague or the student's family about what eye contact means in their culture before assuming anything.", type: "curious" },
+          { text: "I adjust my own read of the moment and stop assuming avoidance means disrespect or disengagement.", type: "adaptive" },
+          { text: "I name the difference openly with the student and we talk about when each style of eye contact might be expected.", type: "bridging" }
+        ]
+      }
+    ],
+    feedback: {
+      structured: {
+        style: "The Structured Lens",
+        strength: "You believe in consistency and you apply it equally. Students know what to expect from you and that equity of expectation can feel like fairness. You don't make exceptions, and that can feel safe.",
+        pitfall: "Watch for: treating cultural difference as noncompliance. When a student's behavior doesn't match what you were taught to expect, the question is not 'why won't they comply' but 'what does this behavior mean in their context.'",
+        language: "Try saying to yourself: \"Before I correct this, I should ask whether this is a skill gap, a values difference, or something I don't yet understand about this student's world.\""
+      },
+      curious: {
+        style: "The Curious Learner",
+        strength: "You ask questions before you make judgments. You are genuinely interested in your students' contexts and that curiosity is one of the strongest foundations for culturally responsive teaching.",
+        pitfall: "Watch for getting so curious about the why that you delay taking action. At some point, curiosity has to translate into a change in practice, not just better understanding.",
+        language: "Try saying to yourself: \"I know enough to make a different choice right now. Curiosity is how I start, but action is how I show up.\""
+      },
+      adaptive: {
+        style: "The Adaptive Teacher",
+        strength: "You adjust your practice to meet students where they are. You don't insist that students adapt to you. You do the work of adapting to them. This is the core of culturally responsive teaching.",
+        pitfall: "Watch for: adapting in ways that lower expectations rather than adjust methods. There is a difference between meeting a student where they are and leaving them there.",
+        language: "Try saying to yourself: \"I can adapt my methods without adapting my expectations. The standard stays high. The path to it changes.\""
+      },
+      bridging: {
+        style: "The Bridge Builder",
+        strength: "You hold two worlds at once. You honor what students bring and you teach them to move through spaces that don't always honor it. That is a profound form of advocacy dressed as teaching.",
+        pitfall: "Watch for: doing so much bridging that you exhaust yourself. You cannot be every student's cultural translator, emotional support, and academic instructor simultaneously. Build structures, not just relationships.",
+        language: "Try saying to yourself: \"I am building bridges, not carrying every student across them. My job is to make the bridge visible and teach them to walk it.\""
+      }
+    }
+  },
+  {
+    id: "M", name: "Communication Style",
+    talkPrompt: "Think about a teacher you had who communicated very differently from how you just described yourself. What did you need from them that they didn't give you, or what did you get that surprised you?",
+    color: "#8B6914",
+    question: "\"How do I naturally speak, listen, and respond, and who does that work for?\"",
+    scenarios: [
+      {
+        text: "You need the class to stop talking and refocus. What do you do first?",
+        options: [
+          { text: "I raise my hand and wait silently for them to notice me.", type: "nonverbal" },
+          { text: "I use a clap pattern and wait for them to mirror it back.", type: "rhythmic" },
+          { text: "I use a firm, clear voice: 'Eyes on me in 3, 2, 1.'", type: "direct" },
+          { text: "I walk to the center of the room and use my presence.", type: "positional" }
+        ]
+      },
+      {
+        text: "A student gives a wrong answer in front of the class. You respond by:",
+        options: [
+          { text: "Affirming their effort and redirecting: 'Good thinking, let's build on that.'", type: "rhythmic" },
+          { text: "Asking a follow-up question to help them find the right answer themselves.", type: "nonverbal" },
+          { text: "Correcting directly but kindly so the class hears the right answer.", type: "direct" },
+          { text: "Calling on another student and coming back to them privately after.", type: "positional" }
+        ]
+      },
+      {
+        text: "A colleague tells you that your directions during transitions are confusing students.",
+        options: [
+          { text: "I thank them immediately and ask for specific suggestions.", type: "direct" },
+          { text: "I watch how they handle transitions to see what I'm missing.", type: "nonverbal" },
+          { text: "I reflect privately and adjust my language before the next day.", type: "positional" },
+          { text: "I feel defensive at first but come back to it when I've calmed down.", type: "rhythmic" }
+        ]
+      }
+    ],
+    feedback: {
+      direct: {
+        style: "The Direct Communicator",
+        strength: "You are clear, decisive, and honest. Students always know where they stand with you and what you expect. Clarity is a form of care, and you lead with it. This is especially powerful for students who have experienced inconsistency in adults.",
+        pitfall: "Watch for directness that closes down rather than opens up. Students who need invitation, warmth, or gradual trust may experience your directness as coldness or criticism, even when that is not your intention.",
+        language: "Try saying to yourself: \"Being clear is one of my gifts. I need to make sure my clarity sounds like an invitation, not a verdict.\""
+      },
+      nonverbal: {
+        style: "The Silent Communicator",
+        strength: "You communicate volumes without words. You read body language, use presence, and give students room to process. This is sophisticated pedagogy. Most new teachers over-talk. You already know when to be quiet.",
+        pitfall: "Watch for: students who need explicit verbal instruction and explicit verbal affirmation. Not every student can read your nonverbal signals. Some students will experience your silence as absence.",
+        language: "Try saying to yourself: \"Some students need to hear it, not just see it. I need to say out loud what I'm also showing.\""
+      },
+      rhythmic: {
+        style: "The Relational Communicator",
+        strength: "You build rapport through tone, warmth, and back-and-forth. Students feel heard by you because you communicate like conversation, not broadcast. You will be the teacher students come to when they need to talk.",
+        pitfall: "Watch for communicating so relationally that your expectations feel flexible. Students need to know that your warmth and your standards are both real, and that one doesn't cancel out the other.",
+        language: "Try saying to yourself: \"I can be warm and firm in the same breath. The most caring thing I can do is be both.\""
+      },
+      positional: {
+        style: "The Strategic Communicator",
+        strength: "You think before you speak. You use your physical presence, your timing, and your positioning deliberately. Students experience you as measured and intentional. That intentionality creates a sense that you are always in command of the room.",
+        pitfall: "Watch for: being so strategic that students feel they can't reach you. The student who needs spontaneous connection may experience your deliberateness as distance.",
+        language: "Try saying to yourself: \"My intentionality is a strength. I also need to leave room for the unplanned moment, the conversation that wasn't on my list but was exactly what a student needed.\""
+      }
+    }
+  }
+];
+
+// ── STATE ──────────────────────────────────────────────────────────────────
+let state = {
+  phase: "cover",
+  dimIndex: 0,
+  scenarioIndex: 0,
+  answers: { R: [], C: [], A: [], M: [] },
+  teacherName: "", school: "", grade: "", date: ""
+};
+
+// ── URL PARAM PRE-FILL ─────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', function() {
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get('fn');
+  const lastName = params.get('ln');
+  if (name || lastName) {
+    document.getElementById('teacher-name').value = [name, lastName].filter(Boolean).join(' ');
+  }
+  const today = new Date();
+  document.getElementById('teacher-date').value =
+    (today.getMonth()+1).toString().padStart(2,'0') + '/' +
+    today.getDate().toString().padStart(2,'0') + '/' +
+    today.getFullYear();
+});
+
+// ── HELPERS ────────────────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+function updateProgress() {
+  const total = dimensions.length * 3;
+  const done = dimensions.slice(0, state.dimIndex).length * 3
+    + state.scenarioIndex
+    + (state.phase === "results" ? total : 0);
+  document.getElementById("progress").style.width = Math.min(100, Math.round(done / total * 100)) + "%";
+}
+
+function dominantType(arr) {
+  const counts = {};
+  arr.forEach(t => { counts[t] = (counts[t] || 0) + 1; });
+  return Object.entries(counts).sort((a,b) => b[1]-a[1])[0][0];
+}
+
+// ── FLOW ───────────────────────────────────────────────────────────────────
+function startAssessment() {
+  state.teacherName = document.getElementById("teacher-name").value || "Teacher";
+  state.school = document.getElementById("teacher-school").value;
+  state.grade = document.getElementById("teacher-grade").value;
+  state.date = document.getElementById("teacher-date").value;
+  state.phase = "questions";
+  state.dimIndex = 0;
+  state.scenarioIndex = 0;
+  showScreen("question-screen");
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const dim = dimensions[state.dimIndex];
+  const scenario = dim.scenarios[state.scenarioIndex];
+
+  document.getElementById("q-dim-label").textContent = `Dimension ${dim.id}: ${dim.name}`;
+  document.getElementById("q-counter").textContent = `Question ${state.dimIndex * 3 + state.scenarioIndex + 1} of 12`;
+  document.getElementById("q-icon").textContent = dim.id;
+  document.getElementById("q-icon").style.background = dim.color;
+  document.getElementById("q-dim-name").textContent = dim.name;
+  document.getElementById("q-dim-question").textContent = dim.question;
+  document.getElementById("q-scenario").textContent = scenario.text;
+
+  const optEl = document.getElementById("q-options");
+  optEl.innerHTML = "";
+  const letters = ["A", "B", "C", "D"];
+  scenario.options.forEach((opt, i) => {
+    const div = document.createElement("div");
+    div.className = "q-option";
+    div.innerHTML = `<span class="q-option-letter">${letters[i]}</span><span>${opt.text}</span>`;
+    div.addEventListener("click", () => selectOption(div, opt.type, dim.id, i));
+    optEl.appendChild(div);
+  });
+
+  document.getElementById("q-next").classList.remove("ready");
+  updateProgress();
+}
+
+function selectOption(el, type, dimId, idx) {
+  document.querySelectorAll(".q-option").forEach(o => o.classList.remove("selected"));
+  el.classList.add("selected");
+  document.getElementById("q-next").classList.add("ready");
+  document.getElementById("q-next")._selectedType = type;
+  document.getElementById("q-next")._dimId = dimId;
+}
+
+function nextQuestion() {
+  const type = document.getElementById("q-next")._selectedType;
+  const dimId = document.getElementById("q-next")._dimId;
+  state.answers[dimId].push(type);
+
+  state.scenarioIndex++;
+  if (state.scenarioIndex >= dimensions[state.dimIndex].scenarios.length) {
+    state.scenarioIndex = 0;
+    state.dimIndex++;
+    if (state.dimIndex >= dimensions.length) {
+      state.phase = "results";
+      showScreen("results");
+      renderResults();
+      return;
+    }
+  }
+  renderQuestion();
+}
+
+function goBack() {
+  if (state.phase === "questions") {
+    if (state.scenarioIndex > 0) {
+      state.scenarioIndex--;
+      state.answers[dimensions[state.dimIndex].id].pop();
+    } else if (state.dimIndex > 0) {
+      state.dimIndex--;
+      state.scenarioIndex = dimensions[state.dimIndex].scenarios.length - 1;
+      state.answers[dimensions[state.dimIndex].id].pop();
+    } else {
+      showScreen("cover");
+      return;
+    }
+    renderQuestion();
+  }
+}
+
+// ── RESULTS ────────────────────────────────────────────────────────────────
+function renderResults() {
+  document.getElementById("results-name").textContent =
+    state.teacherName ? `${state.teacherName}'s Reflection` : "Your Reflection";
+
+  const dimContainer = document.getElementById("dim-results");
+  dimContainer.innerHTML = "";
+
+  let identityParts = [];
+
+  dimensions.forEach(dim => {
+    const dominant = dominantType(state.answers[dim.id]);
+    const fb = dim.feedback[dominant];
+    identityParts.push(fb.style);
+
+    const card = document.createElement("div");
+    card.className = "dim-result-card";
+    card.innerHTML = `
+      <div class="dim-card-header" style="border-top: 4px solid ${dim.color};">
+        <div class="dim-card-icon" style="background:${dim.color};">${dim.id}</div>
+        <div class="dim-card-meta">
+          <div class="dim-card-name">${dim.name}</div>
+          <div class="dim-card-style">${fb.style}</div>
+        </div>
+      </div>
+      <div class="dim-card-body">
+        <div class="feedback-block strength">
+          <div class="fb-label strength">Natural Strength</div>
+          <div class="fb-text">${fb.strength}</div>
+        </div>
+        <div class="feedback-block pitfall">
+          <div class="fb-label pitfall">Watch For</div>
+          <div class="fb-text">${fb.pitfall}</div>
+        </div>
+        <div class="feedback-block language">
+          <div class="fb-label language">Language to Try</div>
+          <div class="fb-text">${fb.language}</div>
+        </div>
+        <div class="feedback-block talk">
+          <div class="fb-label talk">Talk About It</div>
+          <div class="talk-prompt">${dim.talkPrompt}</div>
+        </div>
+      </div>
+    `;
+    dimContainer.appendChild(card);
+  });
+
+  const isEl = document.getElementById("identity-statement");
+  isEl.innerHTML = `
+    <div class="is-label">Today, This Is How It Reads</div>
+    <div class="is-text">
+      "Today, I tended to lead with <strong>${identityParts[0]}</strong> energy,
+      respond to challenge as <strong>${identityParts[1]}</strong>,
+      bring a <strong>${identityParts[2]}</strong> lens to my students' worlds,
+      and communicate as <strong>${identityParts[3]}</strong>.<br><br>
+      Going into Year 1, my greatest asset is noticing these tendencies in myself.
+      My greatest challenge will be using that awareness on purpose,
+      especially when the room is loud, the stakes are high, and I am tired."
+    </div>
+    <div class="is-revisit-prompt">Bring this to your coach or your team. Where do they see you the same way? Where do they see you differently?</div>
+  `;
+
+  updateProgress();
+}
+</script>
+</body>
+</html>
