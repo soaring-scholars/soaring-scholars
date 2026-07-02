@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support for Educators | Soaring Scholars LLC</title>
+  <meta name="description"
+    content="High-quality instructional materials should not feel like a burden. Get coaching, workshops, and curriculum support to teach with confidence." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="index.html">
+      <img src="soaring-scholars-logo.png" alt="Soaring Scholars LLC" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="community.html">Community</a></li>
+      <li><a href="educators.html" class="active">Educators</a></li>
+      <li><a href="experts.html">Find Your Experts</a></li>
+      <li><a href="index.html#hero-newsletter-form">Newsletter</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="https://calendly.com/janelle-soaringscholars/connection" target="_blank" class="nav-cta">Book a
+          Consultation</a></li>
+    </ul>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="services.html">Services</a>
+    <a href="community.html">Community</a>
+    <a href="educators.html">Educators</a>
+    <a href="experts.html">Find Your Experts</a>
+    <a href="index.html#hero-newsletter-form">Newsletter</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://calendly.com/janelle-soaringscholars/connection" target="_blank">Book a Consultation</a>
+  </div>
+
+    <div class="page-header"><span class="eyebrow">For Educators</span>
+      <h1>Teaching is Hard Enough.<br /><em>You Deserve Real Support.</em></h1>
+      <p>High-quality instructional materials should not feel like a burden. Soaring Scholars helps you understand,
+        implement, and own your curriculum with confidence.</p>
+    </div>
+    <section class="reality-section">
+      <div class="section-inner">
+        <div class="reality-grid">
+          <div>
+            <p class="section-label">The Teacher Reality</p>
+            <h2 class="section-title">You Were Handed <em>Materials.</em> Not Mastery.</h2>
+            <p class="section-body">Research-based curriculum is only as powerful as the teacher who delivers it. Too
+              many educators are handed high-quality instructional materials with no real coaching, no systems, and no
+              support.</p>
+            <ul class="reality-list">
+              <li>New curriculum rolled out with little to no training or follow-up</li>
+              <li>No structured coaching to bridge the gap between the guide and your classroom</li>
+              <li>Observation feedback that does not connect to what you are actually teaching</li>
+              <li>Students falling behind while you try to figure out what fidelity even means</li>
+            </ul>
+          </div>
+          <div class="support-visual">
+            <h4>What Soaring Scholars Provides</h4>
+            <div class="support-item"><span class="support-item-icon"><span class="gold-sq"></span></span>
+              <p>A needs assessment to identify exactly where you are struggling with your HQIM</p>
+            </div>
+            <div class="support-item"><span class="support-item-icon"><span class="gold-sq"></span></span>
+              <p>Curriculum unpacking workshops so the materials actually make sense</p>
+            </div>
+            <div class="support-item"><span class="support-item-icon"><span class="gold-sq"></span></span>
+              <p>Coaching frameworks that connect observation feedback to classroom practice</p>
+            </div>
+            <div class="support-item"><span class="support-item-icon"><span class="gold-sq"></span></span>
+              <p>Connection to a network of instructional coaches and educators across Texas</p>
+            </div>
+            <div class="support-item"><span class="support-item-icon"><span class="gold-sq"></span></span>
+              <p>Data-driven tools to track student progress and implementation fidelity</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="needs-section">
+      <div class="section-inner">
+        <p class="section-label">Teacher Needs Assessment</p>
+        <h2 class="section-title">Tell Us Where You <em>Need Support.</em></h2>
+        <p class="section-body" style="max-width:600px;">This short assessment identifies your specific challenges with
+          high-quality instructional materials so we can connect you to the right coaching, workshops, and tools.</p>
+        <div class="assessment-card">
+          <h3>Teacher HQIM Needs Assessment</h3>
+          <p>Answer a few quick questions about your curriculum, campus context, and biggest instructional challenges.
+            Janelle will review your responses and connect you to workshops, coaching, or resources that directly
+            address your needs.</p>
+          <!-- TEACHER HQIM NEEDS ASSESSMENT FORM — Formspree xeewzjzg -->
+          <div id="teacher-success" style="display:none;text-align:center;padding:2rem;">
+            <div style="font-size:2.5rem;margin-bottom:0.75rem;"><span class="gold-sq"></span></div>
+            <h4 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy);margin-bottom:0.5rem;">
+              Thank You!</h4>
+            <p style="font-size:0.88rem;color:var(--gray);line-height:1.65;">Janelle will review your responses and
+              reach out with coaching, workshops, or tools matched directly to your needs.</p>
+          </div>
+          <div id="teacher-error"
+            style="display:none;background:#fff3f3;border:1px solid #f5c6c6;border-radius:4px;padding:0.75rem 1rem;margin-bottom:1rem;font-size:0.84rem;color:#c0392b;">
+            Something went wrong. Please try again or email janelle@soaringscholars.org.</div>
+          <form id="teacher-assessment-form">
+            <input type="hidden" name="_subject" value="[TEACHER HQIM ASSESSMENT] New Submission" />
+
+            <div class="form-group"><label>Your Name *</label><input type="text" name="teacher_name"
+                placeholder="First and last name" required /></div>
+            <div class="form-group"><label>Email Address *</label><input type="email" name="email"
+                placeholder="your@email.com" required /></div>
+            <div class="form-group"><label>Grade Level and Subject *</label><input type="text" name="grade_subject"
+                placeholder="e.g. 4th Grade Math or 7th Grade ELA" required /></div>
+            <div class="form-group"><label>Current Curriculum or Materials *</label>
+              <select name="curriculum" required>
+                <option value="" disabled selected>Select your curriculum</option>
+                <option>Bluebonnet Learning</option>
+                <option>Eureka Math / EngageNY</option>
+                <option>Amplify ELA</option>
+                <option>Into Reading (HMH)</option>
+                <option>Open Up Resources</option>
+                <option>STEMscopes</option>
+                <option>Other HQIM</option>
+                <option>No designated curriculum</option>
+              </select>
+            </div>
+            <div class="form-group"><label>How long have you been using this curriculum?</label>
+              <select name="curriculum_years">
+                <option value="" disabled selected>Select timeframe</option>
+                <option>This is my first year</option>
+                <option>1 to 2 years</option>
+                <option>3 or more years</option>
+              </select>
+            </div>
+
+            <p
+              style="font-size:0.8rem;font-weight:700;color:var(--navy);letter-spacing:0.05em;text-transform:uppercase;margin:1.4rem 0 0.75rem;">
+              Rate each statement: 1 = Never &nbsp; 2 = Rarely &nbsp; 3 = Sometimes &nbsp; 4 = Often &nbsp; 5 = Always
+            </p>
+            <p style="font-size:0.78rem;color:var(--gray);margin-bottom:1.2rem;font-style:italic;">This scale measures
+              where you are on the Compliance to Commitment continuum. There are no wrong answers.</p>
+
+            <div class="likert-group">
+              <label class="likert-label">I implement my curriculum lessons as written without skipping or substituting
+                sections.</label>
+              <div class="likert-scale">
+                <span class="likert-anchor">Never</span>
+                <label><input type="radio" name="t1" value="1" required /><span>1</span></label>
+                <label><input type="radio" name="t1" value="2" /><span>2</span></label>
+                <label><input type="radio" name="t1" value="3" /><span>3</span></label>
+                <label><input type="radio" name="t1" value="4" /><span>4</span></label>
+                <label><input type="radio" name="t1" value="5" /><span>5</span></label>
+                <span class="likert-anchor">Always</span>
+              </div>
+            </div>
+
+            <div class="likert-group">
+              <label class="likert-label">I understand the scope and sequence of my curriculum well enough to explain it
+                to a parent.</label>
+              <div class="likert-scale">
+                <span class="likert-anchor">Never</span>
+                <label><input type="radio" name="t2" value="1" required /><span>1</span></label>
+                <label><input type="radio" name="t2" value="2" /><span>2</span></label>
+                <label><input type="radio" name="t2" value="3" /><span>3</span></label>
+                <label><input type="radio" name="t2" value="4" /><span>4</span></label>
+                <label><input type="radio" name="t2" value="5" /><span>5</span></label>
+                <span class="likert-anchor">Always</span>
+              </div>
+            </div>
+
+            <div class="likert-group">
+              <label class="likert-label">I use student data from my curriculum assessments to adjust my
+                instruction.</label>
+              <div class="likert-scale">
+                <span class="likert-anchor">Never</span>
+                <label><input type="radio" name="t3" value="1" required /><span>1</span></label>
+                <label><input type="radio" name="t3" value="2" /><span>2</span></label>
+                <label><input type="radio" name="t3" value="3" /><span>3</span></label>
+                <label><input type="radio" name="t3" value="4" /><span>4</span></label>
+                <label><input type="radio" name="t3" value="5" /><span>5</span></label>
+                <span class="likert-anchor">Always</span>
+              </div>
+            </div>
+
+            <div class="likert-group">
+              <label class="likert-label">I receive coaching or feedback that directly connects to the curriculum I am
+                teaching.</label>
+              <div class="likert-scale">
+                <span class="likert-anchor">Never</span>
+                <label><input type="radio" name="t4" value="1" required /><span>1</span></label>
+                <label><input type="radio" name="t4" value="2" /><span>2</span></label>
+                <label><input type="radio" name="t4" value="3" /><span>3</span></label>
+                <label><input type="radio" name="t4" value="4" /><span>4</span></label>
+                <label><input type="radio" name="t4" value="5" /><span>5</span></label>
+                <span class="likert-anchor">Always</span>
+              </div>
+            </div>
+
+            <div class="likert-group">
+              <label class="likert-label">My campus leadership actively supports my implementation of high-quality
+                instructional materials.</label>
+              <div class="likert-scale">
+                <span class="likert-anchor">Never</span>
+                <label><input type="radio" name="t5" value="1" required /><span>1</span></label>
+                <label><input type="radio" name="t5" value="2" /><span>2</span></label>
+                <label><input type="radio" name="t5" value="3" /><span>3</span></label>
+                <label><input type="radio" name="t5" value="4" /><span>4</span></label>
+                <label><input type="radio" name="t5" value="5" /><span>5</span></label>
+                <span class="likert-anchor">Always</span>
+              </div>
+            </div>
+
+            <div class="likert-group">
+              <label class="likert-label">I feel ownership over my curriculum implementation rather than just going
+                through the motions.</label>
+              <div class="likert-scale">
+                <span class="likert-anchor">Never</span>
+                <label><input type="radio" name="t6" value="1" required /><span>1</span></label>
+                <label><input type="radio" name="t6" value="2" /><span>2</span></label>
+                <label><input type="radio" name="t6" value="3" /><span>3</span></label>
+                <label><input type="radio" name="t6" value="4" /><span>4</span></label>
+                <label><input type="radio" name="t6" value="5" /><span>5</span></label>
+                <span class="likert-anchor">Always</span>
+              </div>
+            </div>
+
+            <div class="form-group" style="margin-top:1.2rem;"><label>What is your biggest implementation challenge
+                right now? (Optional)</label><textarea name="open_response"
+                placeholder="Be as specific as you want. Janelle reads every response personally."
+                style="width:100%;box-sizing:border-box;border:1.5px solid #d1d5db;border-radius:4px;padding:0.65rem 0.85rem;font-family:'DM Sans',sans-serif;font-size:0.88rem;min-height:90px;resize:vertical;background:var(--cream);"></textarea>
+            </div>
+
+            <button type="submit" id="teacher-submit-btn" class="form-submit" style="margin-top:0.5rem;">Submit
+              Assessment</button>
+            <p class="form-note">Your responses go directly to Janelle. Your information stays with Soaring Scholars
+              only.</p>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section style="padding:5rem 2rem;background:var(--white);">
+      <div class="section-inner">
+        <p class="section-label">Free Resources</p>
+        <h2 class="section-title">Two Tools to Know <em>Exactly Where You Stand.</em></h2>
+        <div class="resource-box">
+          <div>
+            <h3>Curriculum Readiness <em>Assessment</em></h3>
+            <p>Know where your campus sits on the implementation fidelity continuum. Built for teachers, instructional
+              coaches, and campus principals.</p>
+            <div class="resource-cta"><a href="assessment.html" target="_blank" class="btn-primary">Take the
+                Assessment</a></div>
+          </div>
+          <div>
+            <h3>Teacher Identity <em>Reflection</em></h3>
+            <p>Understand your natural tendencies before you walk through the door. The RCAM Reflection names your
+              relationship style, response to challenge, cultural awareness, and communication approach — 12 questions,
+              instant results.</p>
+            <div class="resource-cta"><a href="RCAM_Teacher_Identity_Profile.html" class="btn-dark">Start the
+                Reflection</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div class="cta-strip">
+      <div class="section-inner">
+        <h2>Ready to Own Your Curriculum?</h2>
+        <p>Book a free discovery call and let's build a plan that actually works in your classroom.</p>
+        <div class="btn-row"><a href="https://calendly.com/janelle-soaringscholars/connection" target="_blank"
+            class="btn-dark">Book a Free Discovery Call</a></div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-logo"><img src="soaring-scholars-logo.png" alt="Soaring Scholars LLC" /></div>
+      <div class="footer-nav"><a href="index.html">Home</a><a href="about.html">About</a><a
+          href="services.html">Services</a><a href="community.html">Community</a><a
+          href="educators.html">Educators</a><a href="experts.html">Find Your Experts</a><a
+          href="contact.html">Contact</a></div>
+      <p class="footer-copy">&copy; 2026 Soaring Scholars LLC &middot; soaringscholars.org</p>
+    </footer>
+
+  <script src="assets/nav.js"></script>
+  <script>
+    /* Teacher HQIM Assessment submission */
+    document.getElementById('teacher-assessment-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      var btn = document.getElementById('teacher-submit-btn');
+      var success = document.getElementById('teacher-success');
+      var error = document.getElementById('teacher-error');
+      error.style.display = 'none';
+      btn.disabled = true; btn.textContent = 'Sending...';
+      var formData = new FormData(e.target);
+      e.target.querySelectorAll('.likert-group').forEach(function (group) {
+        var checked = group.querySelector('input[type="radio"]:checked');
+        var question = group.querySelector('.likert-label');
+        if (checked && question) {
+          formData.delete(checked.name);
+          formData.append(question.textContent.trim(), checked.value);
+        }
+      });
+      try {
+        var res = await fetch('https://formspree.io/f/xgojzevb', {
+          method: 'POST', body: formData, headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) { e.target.style.display = 'none'; success.style.display = 'block'; }
+        else { error.style.display = 'block'; btn.disabled = false; btn.textContent = 'Submit Assessment'; }
+      } catch (err) { error.style.display = 'block'; btn.disabled = false; btn.textContent = 'Submit Assessment'; }
+    });
+  </script>
+</body>
+
+</html>
